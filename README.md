@@ -1,3 +1,1 @@
 # docker-app
-
-Docker App
