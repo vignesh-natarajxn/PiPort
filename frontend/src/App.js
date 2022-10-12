@@ -7,32 +7,37 @@ import {
 
 import Users from "./user/pages/Users";
 import NewResume from "./resumes/pages/NewResume";
+import MainNavigation from "./shared/components/Navigation/MainNavigation";
 
 import "./App.css";
 
 const App = () => {
   return (
     <Router>
-      <h1 className="App">Riveting Resumes!</h1>
-      <Switch>
-        <Route path="/" exact>
-          <Users />
-        </Route>
-        <Route path="/resumes/new" exact>
-          <NewResume />
-        </Route>
-        <Redirect to="/" />
-      </Switch>
+      <MainNavigation />
+      <main>
+        <Switch>
+          <Route path="/" exact>
+            <Users />
+          </Route>
+          <Route path="/resumes/new" exact>
+            <NewResume />
+          </Route>
+          <Redirect to="/" />
+        </Switch>
+      </main>
     </Router>
   );
 };
 
 export default App;
 
-{/* <div
+{
+  /* <div
       style={{
         backgroundColor: "#292929",
         // width: "100px",
         // height: "100px",
       }}
-    ></div> */}
+    ></div> */
+}
