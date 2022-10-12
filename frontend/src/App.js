@@ -13,7 +13,7 @@ import "./App.css";
 const App = () => {
   return (
     <Router>
-      {/* <h1 className="App">Riveting Resumes!</h1> */}
+      <h1 className="App">Riveting Resumes!</h1>
       <Switch>
         <Route path="/" exact>
           <Users />
@@ -28,3 +28,11 @@ const App = () => {
 };
 
 export default App;
+
+{/* <div
+      style={{
+        backgroundColor: "#292929",
+        // width: "100px",
+        // height: "100px",
+      }}
+    ></div> */}
