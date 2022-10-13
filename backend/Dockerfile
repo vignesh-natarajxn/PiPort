@@ -2,7 +2,7 @@ FROM node:14
 
 WORKDIR /app/backend
 
-COPY package.json .
+COPY package.json /app/backend
 
 RUN npm install
 
@@ -10,4 +10,4 @@ COPY . .
 
 EXPOSE 3000
 
-CMD [ "node", "app.mjs" ]
+CMD [ "node", "server.js" ]
