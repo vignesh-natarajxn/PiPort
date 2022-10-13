@@ -9,10 +9,10 @@ const NavLinks = props => {
       <NavLink to="/" exact>All Users</NavLink>
     </li>
     <li>
-      <NavLink to="/u1/places">My Resumes</NavLink>
+      <NavLink to="/u1/resumes">My Resumes</NavLink>
     </li>
     <li>
-      <NavLink to="/places/new">Add Resume</NavLink>
+      <NavLink to="/resumes/new">Add Resume</NavLink>
     </li>
     <li>
       <NavLink to="/auth">Login</NavLink>

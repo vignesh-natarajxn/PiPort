@@ -7,6 +7,7 @@ import {
 
 import Users from "./user/pages/Users";
 import NewResume from "./resumes/pages/NewResume";
+import UserResumes from './resumes/pages/UserResumes';
 import MainNavigation from "./shared/components/Navigation/MainNavigation";
 
 import "./App.css";
@@ -19,6 +20,9 @@ const App = () => {
         <Switch>
           <Route path="/" exact>
             <Users />
+          </Route>
+          <Route path="/:userId/resumes" exact>
+            <UserResumes />
           </Route>
           <Route path="/resumes/new" exact>
             <NewResume />
