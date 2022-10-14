@@ -1,4 +1,5 @@
 import React from "react";
+import { useParams } from "react-router-dom";
 
 import ResumeList from "../components/ResumeList";
 
@@ -32,7 +33,11 @@ const DUMMY_RESUMES = [
 ];
 
 const UserResumes = () => {
-  return <ResumeList items={DUMMY_RESUMES} />;
+  const userId = useParams().userId;
+  const loadedResumes = DUMMY_RESUMES.filter(
+    (resume) => resume.creator === userId
+  );
+  return <ResumeList items={loadedResumes} />;
 };
 
 export default UserResumes;
