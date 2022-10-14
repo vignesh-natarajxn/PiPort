@@ -1,9 +1,28 @@
-# docker
+# Docker
 
-docker build .  //(dockerfile in same folder) build image
+Docker-compose
+```shell
 
+``` 
+
+Build image (dockerfile in same folder):
+```shell
+docker build .
+```
+
+Run (frontend: port 3000, backend: port 5000):
+```shell
 docker run -p 3000:3000 <id>
+```
 
-docker ps   //list active containers (add -a for all)
+List active containers (add -a for all):
+```shell
+docker ps
+```
 
+Stop a container:
+```shell
 docker stop <name>
+```
+
+
