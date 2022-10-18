@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 
 import Input from '../../shared/components/FormElements/Input';
@@ -40,23 +40,41 @@ const DUMMY_RESUMES = [
 ];
 
 const UpdateResume = () => {
+  const [isLoading, setIsLoading] = useState(true);
   const resumeId = useParams().resumeId;
+
+  const [formState, inputHandler, setFormData] = useForm(
+    {
+      title: {
+        value: '',
+        isValid: false
+      },
+      description: {
+        value: '',
+        isValid: false
+      }
+    },
+    false
+  );
 
   const identifiedResume = DUMMY_RESUMES.find(p => p.id === resumeId);
 
-  const [formState, inputHandler] = useForm(
-    {
-      title: {
-        value: identifiedResume.title,
-        isValid: true
+  useEffect(() => {
+    setFormData(
+      {
+        title: {
+          value: identifiedResume.title,
+          isValid: true
+        },
+        description: {
+          value: identifiedResume.description,
+          isValid: true
+        }
       },
-      description: {
-        value: identifiedResume.description,
-        isValid: true
-      }
-    },
-    true
-  );
+      true
+    );
+    setIsLoading(false);
+  }, [setFormData, identifiedResume]);
 
   const resumeUpdateSubmitHandler = event => {
     event.preventDefault();
@@ -67,6 +85,14 @@ const UpdateResume = () => {
     return (
       <div className="center">
         <h2>Could not find resume!</h2>
+      </div>
+    );
+  }
+
+  if (isLoading) {
+    return (
+      <div className="center">
+        <h2>Loading...</h2>
       </div>
     );
   }
