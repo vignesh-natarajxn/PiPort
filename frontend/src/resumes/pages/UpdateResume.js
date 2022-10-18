@@ -53,7 +53,7 @@ const UpdateResume = () => {
   }
 
   return (
-    <form className="place-form">
+    <form className="resume-form">
       <Input
         id="title"
         element="input"
