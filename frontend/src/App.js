@@ -7,7 +7,8 @@ import {
 
 import Users from "./user/pages/Users";
 import NewResume from "./resumes/pages/NewResume";
-import UserResumes from './resumes/pages/UserResumes';
+import UserResumes from "./resumes/pages/UserResumes";
+import UpdateResume from './resumes/pages/UpdateResume';
 import MainNavigation from "./shared/components/Navigation/MainNavigation";
 
 import "./App.css";
@@ -26,6 +27,9 @@ const App = () => {
           </Route>
           <Route path="/resumes/new" exact>
             <NewResume />
+          </Route>
+          <Route path="/places/:placeId">
+            <UpdateResume />
           </Route>
           <Redirect to="/" />
         </Switch>
