@@ -1,48 +1,67 @@
-import React from "react";
-import { useParams } from "react-router-dom";
+import React from 'react';
+import { useParams } from 'react-router-dom';
 
-import Input from "../../shared/components/FormElements/Input";
-import Button from "../../shared/components/FormElements/Button";
-import "./ResumeForm.css";
-
+import Input from '../../shared/components/FormElements/Input';
+import Button from '../../shared/components/FormElements/Button';
 import {
   VALIDATOR_REQUIRE,
-  VALIDATOR_MINLENGTH,
-} from "../../shared/util/validators";
+  VALIDATOR_MINLENGTH
+} from '../../shared/util/validators';
+import { useForm } from '../../shared/hooks/form-hook';
+import './ResumeForm.css';
 
 const DUMMY_RESUMES = [
   {
-    id: "p1",
-    title: "Empire State Building",
-    description: "One of the most famous sky scrapers in the world!",
+    id: 'p1',
+    title: 'Empire State Building',
+    description: 'One of the most famous sky scrapers in the world!',
     imageUrl:
-      "https://upload.wikimedia.org/wikipedia/commons/thumb/d/df/NYC_Empire_State_Building.jpg/640px-NYC_Empire_State_Building.jpg",
-    address: "20 W 34th St, New York, NY 10001",
+      'https://upload.wikimedia.org/wikipedia/commons/thumb/d/df/NYC_Empire_State_Building.jpg/640px-NYC_Empire_State_Building.jpg',
+    address: '20 W 34th St, New York, NY 10001',
     location: {
       lat: 40.7484405,
-      lng: -73.9878584,
+      lng: -73.9878584
     },
-    creator: "u1",
+    creator: 'u1'
   },
   {
-    id: "p2",
-    title: "Empire State Building",
-    description: "One of the most famous sky scrapers in the world!",
+    id: 'p2',
+    title: 'Empire State Building',
+    description: 'One of the most famous sky scrapers in the world!',
     imageUrl:
-      "https://upload.wikimedia.org/wikipedia/commons/thumb/d/df/NYC_Empire_State_Building.jpg/640px-NYC_Empire_State_Building.jpg",
-    address: "20 W 34th St, New York, NY 10001",
+      'https://upload.wikimedia.org/wikipedia/commons/thumb/d/df/NYC_Empire_State_Building.jpg/640px-NYC_Empire_State_Building.jpg',
+    address: '20 W 34th St, New York, NY 10001',
     location: {
       lat: 40.7484405,
-      lng: -73.9878584,
+      lng: -73.9878584
     },
-    creator: "u2",
-  },
+    creator: 'u2'
+  }
 ];
 
 const UpdateResume = () => {
   const resumeId = useParams().resumeId;
 
-  const identifiedResume = DUMMY_RESUMES.find((p) => p.id === resumeId);
+  const identifiedResume = DUMMY_RESUMES.find(p => p.id === resumeId);
+
+  const [formState, inputHandler] = useForm(
+    {
+      title: {
+        value: identifiedResume.title,
+        isValid: true
+      },
+      description: {
+        value: identifiedResume.description,
+        isValid: true
+      }
+    },
+    true
+  );
+
+  const resumeUpdateSubmitHandler = event => {
+    event.preventDefault();
+    console.log(formState.inputs);
+  };
 
   if (!identifiedResume) {
     return (
@@ -53,7 +72,7 @@ const UpdateResume = () => {
   }
 
   return (
-    <form className="resume-form">
+    <form className="resume-form" onSubmit={resumeUpdateSubmitHandler}>
       <Input
         id="title"
         element="input"
@@ -61,9 +80,9 @@ const UpdateResume = () => {
         label="Title"
         validators={[VALIDATOR_REQUIRE()]}
         errorText="Please enter a valid title."
-        onInput={() => {}}
-        value={identifiedResume.title}
-        valid={true}
+        onInput={inputHandler}
+        initialValue={formState.inputs.title.value}
+        initialValid={formState.inputs.title.isValid}
       />
       <Input
         id="description"
@@ -71,11 +90,11 @@ const UpdateResume = () => {
         label="Description"
         validators={[VALIDATOR_MINLENGTH(5)]}
         errorText="Please enter a valid description (min. 5 characters)."
-        onInput={() => {}}
-        value={identifiedResume.description}
-        valid={true}
+        onInput={inputHandler}
+        initialValue={formState.inputs.description.value}
+        initialValid={formState.inputs.description.isValid}
       />
-      <Button type="submit" disabled={true}>
+      <Button type="submit" disabled={!formState.isValid}>
         UPDATE RESUME
       </Button>
     </form>
