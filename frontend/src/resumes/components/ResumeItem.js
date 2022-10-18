@@ -40,7 +40,7 @@ const ResumeItem = (props) => {
             <Button inverse onClick={openMapHandler}>
               VIEW ON MAP
             </Button>
-            <Button to={`/resume/${props.id}`}>EDIT</Button>
+            <Button to={`/resumes/${props.id}`}>EDIT</Button>
             <Button danger>DELETE</Button>
           </div>
         </Card>

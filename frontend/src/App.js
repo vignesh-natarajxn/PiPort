@@ -28,7 +28,7 @@ const App = () => {
           <Route path="/resumes/new" exact>
             <NewResume />
           </Route>
-          <Route path="/places/:placeId">
+          <Route path="/resumes/:resumeId">
             <UpdateResume />
           </Route>
           <Redirect to="/" />
