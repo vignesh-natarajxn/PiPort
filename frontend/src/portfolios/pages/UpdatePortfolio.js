@@ -9,9 +9,9 @@ import {
   VALIDATOR_MINLENGTH
 } from '../../shared/util/validators';
 import { useForm } from '../../shared/hooks/form-hook';
-import './ResumeForm.css';
+import './PortfolioForm.css';
 
-const DUMMY_RESUMES = [
+const DUMMY_PORTFOLIOS = [
   {
     id: 'p1',
     title: 'Empire State Building',
@@ -40,9 +40,9 @@ const DUMMY_RESUMES = [
   }
 ];
 
-const UpdateResume = () => {
+const UpdatePortfolio = () => {
   const [isLoading, setIsLoading] = useState(true);
-  const resumeId = useParams().resumeId;
+  const portfolioId = useParams().portfolioId;
 
   const [formState, inputHandler, setFormData] = useForm(
     {
@@ -58,18 +58,18 @@ const UpdateResume = () => {
     false
   );
 
-  const identifiedResume = DUMMY_RESUMES.find(p => p.id === resumeId);
+  const identifiedPortfolio = DUMMY_PORTFOLIOS.find(p => p.id === portfolioId);
 
   useEffect(() => {
-    if (identifiedResume) {
+    if (identifiedPortfolio) {
       setFormData(
         {
           title: {
-            value: identifiedResume.title,
+            value: identifiedPortfolio.title,
             isValid: true
           },
           description: {
-            value: identifiedResume.description,
+            value: identifiedPortfolio.description,
             isValid: true
           }
         },
@@ -77,18 +77,18 @@ const UpdateResume = () => {
       );
     }
     setIsLoading(false);
-  }, [setFormData, identifiedResume]);
+  }, [setFormData, identifiedPortfolio]);
 
-  const resumeUpdateSubmitHandler = event => {
+  const portfolioUpdateSubmitHandler = event => {
     event.preventDefault();
     console.log(formState.inputs);
   };
 
-  if (!identifiedResume) {
+  if (!identifiedPortfolio) {
     return (
       <div className="center">
         <Card>
-          <h2>Could not find resume!</h2>
+          <h2>Could not find portfolio!</h2>
         </Card>
       </div>
     );
@@ -103,7 +103,7 @@ const UpdateResume = () => {
   }
 
   return (
-    <form className="resume-form" onSubmit={resumeUpdateSubmitHandler}>
+    <form className="portfolio-form" onSubmit={portfolioUpdateSubmitHandler}>
       <Input
         id="title"
         element="input"
@@ -126,10 +126,10 @@ const UpdateResume = () => {
         initialValid={formState.inputs.description.isValid}
       />
       <Button type="submit" disabled={!formState.isValid}>
-        UPDATE RESUME
+        UPDATE PORTFOLIO
       </Button>
     </form>
   );
 };
 
-export default UpdateResume;
+export default UpdatePortfolio;

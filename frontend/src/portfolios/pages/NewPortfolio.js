@@ -7,9 +7,9 @@ import {
   VALIDATOR_MINLENGTH
 } from '../../shared/util/validators';
 import { useForm } from '../../shared/hooks/form-hook';
-import './ResumeForm.css';
+import './PortfolioForm.css';
 
-const NewResume = () => {
+const NewPortfolio = () => {
   const [formState, inputHandler] = useForm(
     {
       title: {
@@ -28,13 +28,13 @@ const NewResume = () => {
     false
   );
 
-  const resumeSubmitHandler = event => {
+  const portfolioSubmitHandler = event => {
     event.preventDefault();
     console.log(formState.inputs); // send this to the backend!
   };
 
   return (
-    <form className="resume-form" onSubmit={resumeSubmitHandler}>
+    <form className="portfolio-form" onSubmit={portfolioSubmitHandler}>
       <Input
         id="title"
         element="input"
@@ -61,10 +61,10 @@ const NewResume = () => {
         onInput={inputHandler}
       />
       <Button type="submit" disabled={!formState.isValid}>
-        ADD RESUME
+        ADD PORTFOLIO
       </Button>
     </form>
   );
 };
 
-export default NewResume;
+export default NewPortfolio;

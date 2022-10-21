@@ -1,9 +1,9 @@
 import React from "react";
 import { useParams } from "react-router-dom";
 
-import ResumeList from "../components/ResumeList";
+import PortfolioList from "../components/PortfolioList";
 
-const DUMMY_RESUMES = [
+const DUMMY_PORTFOLIOS = [
   {
     id: "u1r1",
     creator: "u1",
@@ -23,12 +23,12 @@ const DUMMY_RESUMES = [
   },
 ];
 
-const UserResumes = () => {
+const UserPortfolios = () => {
   const userId = useParams().userId;
-  const loadedResumes = DUMMY_RESUMES.filter(
-    (resume) => resume.creator === userId
+  const loadedPortfolios = DUMMY_PORTFOLIOS.filter(
+    (portfolio) => portfolio.creator === userId
   );
-  return <ResumeList items={loadedResumes} />;
+  return <PortfolioList items={loadedPortfolios} />;
 };
 
-export default UserResumes;
+export default UserPortfolios;

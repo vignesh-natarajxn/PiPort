@@ -1,50 +1,50 @@
-.resume-item {
+.portfolio-item {
   margin: 1rem 0;
 }
 
-.resume-item__content {
+.portfolio-item__content {
   padding: 0;
 }
 
-.resume-item__info {
+.portfolio-item__info {
   padding: 1rem;
   text-align: center;
 }
 
-.resume-item__image {
+.portfolio-item__image {
   width: 100%;
   height: 12.5rem;
   margin-right: 1.5rem;
 }
 
-.resume-item__image img {
+.portfolio-item__image img {
   width: 100%;
   height: 100%;
   object-fit: cover;
 }
 
-.resume-item__info h2,
-.resume-item__info h3,
-.resume-item__info p {
+.portfolio-item__info h2,
+.portfolio-item__info h3,
+.portfolio-item__info p {
   margin: 0 0 0.5rem 0;
 }
 
-.resume-item__actions {
+.portfolio-item__actions {
   padding: 1rem;
   text-align: center;
   border-top: 1px solid #ccc;
 }
 
-.resume-item__modal-content {
+.portfolio-item__modal-content {
   padding: 0;
 }
 
-.resume-item__modal-actions {
+.portfolio-item__modal-actions {
   text-align: right;
 }
 
-.resume-item__actions button,
-.resume-item__actions a {
+.portfolio-item__actions button,
+.portfolio-item__actions a {
   margin: 0.5rem;
 }
 
@@ -54,7 +54,7 @@
 }
 
 @media (min-width: 768px) {
-  .resume-item__image {
+  .portfolio-item__image {
     height: 20rem;
   } 
 }

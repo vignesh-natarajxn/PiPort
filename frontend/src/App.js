@@ -7,9 +7,9 @@ import {
 } from 'react-router-dom';
 
 import Users from './user/pages/Users';
-import NewResume from './resumes/pages/NewResume';
-import UserResumes from './resumes/pages/UserResumes';
-import UpdateResume from './resumes/pages/UpdateResume';
+import NewPortfolio from './portfolios/pages/NewPortfolio';
+import UserPortfolios from './portfolios/pages/UserPortfolios';
+import UpdatePortfolio from './portfolios/pages/UpdatePortfolio';
 import Auth from './user/pages/Auth';
 import MainNav from './shared/components/Navigation/MainNav';
 import { AuthContext } from './shared/context/auth-context';
@@ -33,14 +33,14 @@ const App = () => {
         <Route path="/" exact>
           <Users />
         </Route>
-        <Route path="/:userId/resumes" exact>
-          <UserResumes />
+        <Route path="/:userId/portfolios" exact>
+          <UserPortfolios />
         </Route>
-        <Route path="/resumes/new" exact>
-          <NewResume />
+        <Route path="/portfolios/new" exact>
+          <NewPortfolio />
         </Route>
-        <Route path="/resumes/:resumeId">
-          <UpdateResume />
+        <Route path="/portfolios/:portfolioId">
+          <UpdatePortfolio />
         </Route>
         <Redirect to="/" />
       </Switch>
@@ -51,8 +51,8 @@ const App = () => {
         <Route path="/" exact>
           <Users />
         </Route>
-        <Route path="/:userId/resumes" exact>
-          <UserResumes />
+        <Route path="/:userId/portfolios" exact>
+          <UserPortfolios />
         </Route>
         <Route path="/auth">
           <Auth />
