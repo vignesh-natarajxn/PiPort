@@ -8,7 +8,8 @@ import {
 import Users from "./user/pages/Users";
 import NewResume from "./resumes/pages/NewResume";
 import UserResumes from "./resumes/pages/UserResumes";
-import UpdateResume from './resumes/pages/UpdateResume';
+import UpdateResume from "./resumes/pages/UpdateResume";
+import Auth from "./user/pages/Auth";
 import MainNavigation from "./shared/components/Navigation/MainNavigation";
 
 import "./App.css";
@@ -30,6 +31,9 @@ const App = () => {
           </Route>
           <Route path="/resumes/:resumeId">
             <UpdateResume />
+          </Route>
+          <Route path="/auth">
+            <Auth />
           </Route>
           <Redirect to="/" />
         </Switch>
