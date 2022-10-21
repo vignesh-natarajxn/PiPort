@@ -1,33 +1,34 @@
-import React from "react";
+import React from 'react';
 
-import Card from "../../shared/components/UIElements/Card";
-import ResumeItem from "./ResumeItem";
-import "./ResumeList.css";
+import Card from '../../shared/components/UIElements/Card';
+import ResumeItem from './ResumeItem';
+import Button from '../../shared/components/FormElements/Button';
+import './ResumeList.css';
 
-const ResumeList = (props) => {
+const ResumeList = props => {
   if (props.items.length === 0) {
     return (
-      <div className="place-list center">
+      <div className="resume-list center">
         <Card>
-          <h2>No places found. Maybe create one?</h2>
-          <button>Share Place</button>
+          <h2>No resumes found. Maybe create one?</h2>
+          <Button to="/resumes/new">Share Resume</Button>
         </Card>
       </div>
     );
   }
 
   return (
-    <ul className="place-list">
-      {props.items.map((place) => (
+    <ul className="resume-list">
+      {props.items.map(resume => (
         <ResumeItem
-          key={place.id}
-          id={place.id}
-          image={place.imageUrl}
-          title={place.title}
-          description={place.description}
-          address={place.address}
-          creatorId={place.creator}
-          coordinates={place.location}
+          key={resume.id}
+          id={resume.id}
+          image={resume.imageUrl}
+          title={resume.title}
+          description={resume.description}
+          address={resume.address}
+          creatorId={resume.creator}
+          coordinates={resume.location}
         />
       ))}
     </ul>
