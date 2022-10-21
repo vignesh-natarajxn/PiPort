@@ -11,7 +11,7 @@ import NewResume from './resumes/pages/NewResume';
 import UserResumes from './resumes/pages/UserResumes';
 import UpdateResume from './resumes/pages/UpdateResume';
 import Auth from './user/pages/Auth';
-import MainNavigation from './shared/components/Navigation/MainNavigation';
+import MainNav from './shared/components/Navigation/MainNav';
 import { AuthContext } from './shared/context/auth-context';
 
 const App = () => {
@@ -57,7 +57,7 @@ const App = () => {
         <Route path="/auth">
           <Auth />
         </Route>
-        <Redirect to="/auth" />
+        <Redirect to="/" />
       </Switch>
     );
   }
@@ -67,7 +67,7 @@ const App = () => {
       value={{ isLoggedIn: isLoggedIn, login: login, logout: logout }}
     >
       <Router>
-        <MainNavigation />
+        <MainNav />
         <main>{routes}</main>
       </Router>
     </AuthContext.Provider>

@@ -26,9 +26,7 @@ const ResumeList = props => {
           image={resume.imageUrl}
           title={resume.title}
           description={resume.description}
-          address={resume.address}
           creatorId={resume.creator}
-          coordinates={resume.location}
         />
       ))}
     </ul>

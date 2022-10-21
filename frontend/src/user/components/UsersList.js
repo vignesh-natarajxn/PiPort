@@ -7,7 +7,7 @@ const UsersList = props => {
   if (props.items.length === 0) {
     return (
       <div className="center">
-        <h2>No users found.</h2>
+        <h2 style={{ color: 'white'}}>No users found.</h2>
       </div>
     );
   }

@@ -5,30 +5,20 @@ import ResumeList from "../components/ResumeList";
 
 const DUMMY_RESUMES = [
   {
-    id: "p1",
-    title: "Empire State Building",
-    description: "One of the most famous sky scrapers in the world!",
+    id: "u1r1",
+    title: "Software Development Engineer",
+    description: "I like to type stuff.",
     imageUrl:
-      "https://upload.wikimedia.org/wikipedia/commons/thumb/d/df/NYC_Empire_State_Building.jpg/640px-NYC_Empire_State_Building.jpg",
-    address: "20 W 34th St, New York, NY 10001",
-    location: {
-      lat: 40.7484405,
-      lng: -73.9878584,
-    },
+      "https://cutewallpaper.org/22/minimal-programming-wallpapers/930213660.jpg",
     creator: "u1",
   },
   {
-    id: "p2",
-    title: "Empire State Building",
-    description: "One of the most famous sky scrapers in the world!",
+    id: "u1r2",
+    title: "Embedded Firmware Developer",
+    description: "I give life to computers.",
     imageUrl:
-      "https://upload.wikimedia.org/wikipedia/commons/thumb/d/df/NYC_Empire_State_Building.jpg/640px-NYC_Empire_State_Building.jpg",
-    address: "20 W 34th St, New York, NY 10001",
-    location: {
-      lat: 40.7484405,
-      lng: -73.9878584,
-    },
-    creator: "u2",
+    "https://cdn.wallpapersafari.com/23/71/Ow4QZ5.png",
+    creator: "u1",
   },
 ];
 

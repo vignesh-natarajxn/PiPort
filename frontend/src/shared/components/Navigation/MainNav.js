@@ -5,9 +5,10 @@ import MainHeader from "./MainHeader";
 import NavLinks from "./NavLinks";
 import SideDrawer from "./SideDrawer";
 import Backdrop from "../UIElements/Backdrop";
-import "./MainNavigation.css";
 
-const MainNavigation = (props) => {
+import "./MainNav.css";
+
+const MainNav = (props) => {
   const [drawerIsOpen, setDrawerIsOpen] = useState(false);
 
   const openDrawerHandler = () => {
@@ -36,9 +37,9 @@ const MainNavigation = (props) => {
           <span />
           <span />
         </button>
-        <h1 className="main-navigation__title">
-          <Link to="/">YourPlaces</Link>
-        </h1>
+        <h2 className="main-navigation__title">
+          <Link to="/">Riveting Resumes!</Link>
+        </h2>
         <nav className="main-navigation__header-nav">
           <NavLinks />
         </nav>
@@ -47,4 +48,4 @@ const MainNavigation = (props) => {
   );
 };
 
-export default MainNavigation;
+export default MainNav;
