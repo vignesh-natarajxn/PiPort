@@ -1,18 +1,19 @@
-import React, { useState, useCallback } from 'react';
+import React, { useState, useCallback } from "react";
 import {
   BrowserRouter as Router,
   Route,
   Redirect,
-  Switch
-} from 'react-router-dom';
+  Switch,
+} from "react-router-dom";
 
-import Users from './user/pages/Users';
-import NewPortfolio from './portfolios/pages/NewPortfolio';
-import UserPortfolios from './portfolios/pages/UserPortfolios';
-import UpdatePortfolio from './portfolios/pages/UpdatePortfolio';
-import Auth from './user/pages/Auth';
-import MainNav from './shared/components/Navigation/MainNav';
-import { AuthContext } from './shared/context/auth-context';
+import Users from "./user/pages/Users";
+import Portfolio from "./portfolios/pages/Portfolio";
+import NewPortfolio from "./portfolios/pages/NewPortfolio";
+import UserPortfolios from "./portfolios/pages/UserPortfolios";
+import UpdatePortfolio from "./portfolios/pages/UpdatePortfolio";
+import Auth from "./user/pages/Auth";
+import MainNav from "./shared/components/Navigation/MainNav";
+import { AuthContext } from "./shared/context/auth-context";
 
 const App = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -53,6 +54,9 @@ const App = () => {
         </Route>
         <Route path="/:userId/portfolios" exact>
           <UserPortfolios />
+        </Route>
+        <Route path="/:userId/portfolios/:portfId" exact>
+          <Portfolio />
         </Route>
         <Route path="/auth">
           <Auth />
