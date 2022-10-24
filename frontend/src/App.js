@@ -55,7 +55,7 @@ const App = () => {
         <Route path="/:userId/portfolios" exact>
           <UserPortfolios />
         </Route>
-        <Route path="/:userId/portfolios/:portfId" exact>
+        <Route path="/:userId/portfolios/:portfolioId" exact>
           <Portfolio />
         </Route>
         <Route path="/auth">

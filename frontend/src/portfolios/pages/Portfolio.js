@@ -11,22 +11,20 @@ const DUMMY_PORTFOLIOS = [
     description: "I like to type stuff.",
     imageUrl:
       "https://cutewallpaper.org/22/minimal-programming-wallpapers/930213660.jpg",
-    
   },
   {
     id: "u1r2",
     creator: "u1",
     title: "Embedded Firmware Developer",
     description: "I give life to computers.",
-    imageUrl:
-    "https://cdn.wallpapersafari.com/23/71/Ow4QZ5.png",
+    imageUrl: "https://cdn.wallpapersafari.com/23/71/Ow4QZ5.png",
   },
 ];
 
 const Portfolio = () => {
-  const userId = useParams().userId;
+  const portfolioId = useParams().portfolioId;
   const loadedPortfolios = DUMMY_PORTFOLIOS.filter(
-    (portfolio) => portfolio.creator === userId
+    (portfolio) => portfolio.creator === portfolioId
   );
   return <PortfolioList items={loadedPortfolios} />;
 };
