@@ -81,7 +81,7 @@ const PortfolioItem = (props) => {
               OPEN
             </Button> */}
             {auth.isLoggedIn && (
-              <Button to={`/${userId}/portfolios/${props.id}`}>EDIT</Button>
+              <Button to={`/${userId}/portfolios/${props.id}/edit`}>EDIT</Button>
             )}
 
             {auth.isLoggedIn && (
