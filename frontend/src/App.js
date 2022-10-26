@@ -37,10 +37,10 @@ const App = () => {
         <Route path="/:userId/portfolios" exact>
           <UserPortfolios />
         </Route>
-        <Route path="/portfolios/new" exact>
+        <Route path="/:userId/portfolios/new" exact>
           <NewPortfolio />
         </Route>
-        <Route path="/portfolios/:portfolioId">
+        <Route path="/:userId/portfolios/:portfolioId">
           <UpdatePortfolio />
         </Route>
         <Redirect to="/" />
