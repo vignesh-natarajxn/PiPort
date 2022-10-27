@@ -4,6 +4,7 @@
 }
 
 .authentication {
+  color: white;
   width: 90%;
   max-width: 25rem;
   margin: 7rem auto;
@@ -11,5 +12,6 @@
 }
 
 .authentication form {
+  
   margin-bottom: 1rem;
 }
