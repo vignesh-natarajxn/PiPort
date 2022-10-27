@@ -1,7 +1,10 @@
 import React from "react";
 import { useParams } from "react-router-dom";
 
-import PortfolioList from "../components/PortfolioList";
+import Avatar from "../../shared/components/UIElements/Avatar";
+import Card from "../../shared/components/UIElements/Card";
+
+import "../../user/components/UserItem.css";
 
 const DUMMY_PORTFOLIOS = [
   {
@@ -20,13 +23,29 @@ const DUMMY_PORTFOLIOS = [
     imageUrl: "https://cdn.wallpapersafari.com/23/71/Ow4QZ5.png",
   },
 ];
+const USERS = [
+  { id: "u1", name: "Vignesh Natarajan", image: "", portfolios: "2" },
+];
 
 const Portfolio = () => {
   const portfolioId = useParams().portfolioId;
+  const userId = useParams().userId;
+
   const loadedPortfolios = DUMMY_PORTFOLIOS.filter(
-    (portfolio) => portfolio.creator === portfolioId
+    (portfolio) => portfolio.id === portfolioId
   );
-  return <PortfolioList items={loadedPortfolios} />;
+  const user = USERS.filter((user) => user.id === userId);
+
+  return (
+    <Card className="portfolio-item__content">
+      <div className="user-item__image">
+        <Avatar image={user.image} alt={user.name} />
+      </div>
+      <div className="user-item__info">
+        <h1>{user.name}</h1>
+      </div>
+    </Card>
+  );
 };
 
 export default Portfolio;
