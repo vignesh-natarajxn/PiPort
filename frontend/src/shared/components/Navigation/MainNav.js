@@ -38,7 +38,7 @@ const MainNav = (props) => {
           <span />
         </button>
         <h2 className="main-navigation__title">
-          <Link to="/">PiqPort</Link>
+          <Link to="/">PiPort</Link>
         </h2>
         <nav className="main-navigation__header-nav">
           <NavLinks />

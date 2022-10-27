@@ -1,4 +1,5 @@
 .portfolio-form {
+  color: white;
   list-style: none;
   margin: 0 auto;
   padding: 1rem;
@@ -6,5 +7,38 @@
   max-width: 40rem;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.26);
   border-radius: 6px;
-  background: white;
+  background: rgb(31, 31, 31);
+}
+
+.portfolio-form input {
+  color: white;
+  list-style: none;
+  margin: 0 auto;
+  padding: 1rem;
+  width: 90%;
+  max-width: 40rem;
+  border-radius: 12px;
+  background: rgb(31, 31, 31);
+}
+
+.portfolio-form textarea {
+  color: white;
+  list-style: none;
+  margin: 0 auto;
+  padding: 1rem;
+  width: 90%;
+  max-width: 40rem;
+  border-radius: 12px;
+  background: rgb(31, 31, 31);
+}
+
+.portfolio-form-select-input-field {
+  color: white;
+  list-style: none;
+  margin: 0 auto;
+  padding: 1rem;
+  width: 90%;
+  max-width: 40rem;
+  border-radius: 12px;
+  background: rgb(31, 31, 31);
 }

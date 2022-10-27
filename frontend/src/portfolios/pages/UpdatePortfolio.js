@@ -1,43 +1,40 @@
-import React, { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import React, { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
 
-import Input from '../../shared/components/FormElements/Input';
-import Button from '../../shared/components/FormElements/Button';
-import Card from '../../shared/components/UIElements/Card';
+import Input from "../../shared/components/FormElements/Input";
+import Button from "../../shared/components/FormElements/Button";
+import Card from "../../shared/components/UIElements/Card";
 import {
   VALIDATOR_REQUIRE,
-  VALIDATOR_MINLENGTH
-} from '../../shared/util/validators';
-import { useForm } from '../../shared/hooks/form-hook';
-import './PortfolioForm.css';
+  VALIDATOR_MINLENGTH,
+} from "../../shared/util/validators";
+import { useForm } from "../../shared/hooks/form-hook";
+import "./PortfolioForm.css";
 
 const DUMMY_PORTFOLIOS = [
   {
-    id: 'p1',
-    title: 'Empire State Building',
-    description: 'One of the most famous sky scrapers in the world!',
+    id: "u1r1",
+    creator: "u1",
+    title: "Software Development Engineer",
+    description: "I like to type stuff.",
     imageUrl:
-      'https://upload.wikimedia.org/wikipedia/commons/thumb/d/df/NYC_Empire_State_Building.jpg/640px-NYC_Empire_State_Building.jpg',
-    address: '20 W 34th St, New York, NY 10001',
-    location: {
-      lat: 40.7484405,
-      lng: -73.9878584
-    },
-    creator: 'u1'
+      "https://cutewallpaper.org/22/minimal-programming-wallpapers/930213660.jpg",
   },
   {
-    id: 'p2',
-    title: 'Emp. State Building',
-    description: 'One of the most famous sky scrapers in the world!',
+    id: "u1r2",
+    creator: "u1",
+    title: "Embedded Firmware Developer",
+    description: "I give life to computers.",
+    imageUrl: "https://cdn.wallpapersafari.com/23/71/Ow4QZ5.png",
+  },
+  {
+    id: "u2r1",
+    creator: "u2",
+    title: "Chief Executive Officer - Earth",
+    description: "I am your creator.",
     imageUrl:
-      'https://upload.wikimedia.org/wikipedia/commons/thumb/d/df/NYC_Empire_State_Building.jpg/640px-NYC_Empire_State_Building.jpg',
-    address: '20 W 34th St, New York, NY 10001',
-    location: {
-      lat: 40.7484405,
-      lng: -73.9878584
-    },
-    creator: 'u2'
-  }
+      "https://www.nasa.gov/sites/default/files/styles/full_width/public/thumbnails/image/web_first_images_release.png?itok=g21NrdRw",
+  },
 ];
 
 const UpdatePortfolio = () => {
@@ -47,18 +44,20 @@ const UpdatePortfolio = () => {
   const [formState, inputHandler, setFormData] = useForm(
     {
       title: {
-        value: '',
-        isValid: false
+        value: "",
+        isValid: false,
       },
       description: {
-        value: '',
-        isValid: false
-      }
+        value: "",
+        isValid: false,
+      },
     },
     false
   );
 
-  const identifiedPortfolio = DUMMY_PORTFOLIOS.find(p => p.id === portfolioId);
+  const identifiedPortfolio = DUMMY_PORTFOLIOS.find(
+    (p) => p.id === portfolioId
+  );
 
   useEffect(() => {
     if (identifiedPortfolio) {
@@ -66,12 +65,12 @@ const UpdatePortfolio = () => {
         {
           title: {
             value: identifiedPortfolio.title,
-            isValid: true
+            isValid: true,
           },
           description: {
             value: identifiedPortfolio.description,
-            isValid: true
-          }
+            isValid: true,
+          },
         },
         true
       );
@@ -79,7 +78,7 @@ const UpdatePortfolio = () => {
     setIsLoading(false);
   }, [setFormData, identifiedPortfolio]);
 
-  const portfolioUpdateSubmitHandler = event => {
+  const portfolioUpdateSubmitHandler = (event) => {
     event.preventDefault();
     console.log(formState.inputs);
   };
@@ -96,7 +95,8 @@ const UpdatePortfolio = () => {
 
   if (isLoading) {
     return (
-      <div className="center">PLACE
+      <div className="center">
+        Portfolio
         <h2>Loading...</h2>
       </div>
     );
@@ -126,7 +126,7 @@ const UpdatePortfolio = () => {
         initialValid={formState.inputs.description.isValid}
       />
       <Button type="submit" disabled={!formState.isValid}>
-        UPDATE PORTFOLIO
+        Update
       </Button>
     </form>
   );
