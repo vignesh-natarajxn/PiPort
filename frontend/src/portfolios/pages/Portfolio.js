@@ -4,7 +4,7 @@ import { useParams } from "react-router-dom";
 import Avatar from "../../shared/components/UIElements/Avatar";
 import Card from "../../shared/components/UIElements/Card";
 
-import "../../user/components/UserItem.css";
+import "./Portfolio.css";
 
 const DUMMY_PORTFOLIOS = [
   {
@@ -25,26 +25,36 @@ const DUMMY_PORTFOLIOS = [
 ];
 const USERS = [
   { id: "u1", name: "Vignesh Natarajan", image: "", portfolios: "2" },
+  { id: "u2", name: "Yilong Musk", image: "", portfolios: "68" },
 ];
 
 const Portfolio = () => {
   const portfolioId = useParams().portfolioId;
   const userId = useParams().userId;
 
-  const loadedPortfolios = DUMMY_PORTFOLIOS.filter(
+  const portfolio = DUMMY_PORTFOLIOS.filter(
     (portfolio) => portfolio.id === portfolioId
-  );
-  const user = USERS.filter((user) => user.id === userId);
+  )[0];
+  const user = USERS.filter((user) => user.id === userId)[0];
 
   return (
-    <Card className="portfolio-item__content">
-      <div className="user-item__image">
-        <Avatar image={user.image} alt={user.name} />
-      </div>
-      <div className="user-item__info">
-        <h1>{user.name}</h1>
-      </div>
-    </Card>
+    <ul>
+      <li className="user-item">
+        <div className="user-item__image">
+          <Avatar image={user.image} alt={user.name} />
+        </div>
+        <div className="user-item__info">
+          <h2>
+            {user.name}
+            {" - "}
+            <div style={{ color: "#a5a5a5", display: "inline-block" }}>
+              {portfolio.title}
+            </div>
+          </h2>
+        </div>
+      </li>
+      <li></li>
+    </ul>
   );
 };
 

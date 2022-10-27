@@ -27,8 +27,8 @@ const UsersList = (props) => {
               <div className="user-item__info">
                 <h2>{user.name}</h2>
                 <h3>
-                  {user.portfolioCount}{" "}
-                  {user.portfolioCount === 1 ? "Portfolio" : "Portfolios"}
+                  {user.portfolios}{" "}
+                  {user.portfolios === 1 ? "Portfolio" : "Portfolios"}
                 </h3>
               </div>
             </Link>
