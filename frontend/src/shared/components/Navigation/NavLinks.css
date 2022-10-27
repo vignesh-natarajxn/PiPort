@@ -64,13 +64,15 @@
 
   .nav-links button {
     border: 1px solid white;
+    border-radius: 30px;
     color: white;
     background: transparent;
   }
-  
+
   .nav-links button:hover,
   .nav-links button:active {
-    background: #00ff95;
-    color: #292929;
+    border-radius: 30px;
+    background: #e60045;
+    color: #ffffff;
   }
 }

@@ -1,8 +1,12 @@
-import React from "react";
+import React, { useState, useContext } from "react";
 import { useParams } from "react-router-dom";
 
+import Button from "../../shared/components/FormElements/Button";
 import Avatar from "../../shared/components/UIElements/Avatar";
 import Card from "../../shared/components/UIElements/Card";
+
+import { AuthContext } from "../../shared/context/auth-context";
+import Modal from "../../shared/components/UIElements/Modal";
 
 import "./Portfolio.css";
 
@@ -27,7 +31,8 @@ const DUMMY_PORTFOLIOS = [
     creator: "u2",
     title: "Chief Executive Officer - Earth",
     description: "I am your creator.",
-    imageUrl: "https://www.nasa.gov/sites/default/files/styles/full_width/public/thumbnails/image/web_first_images_release.png?itok=g21NrdRw",
+    imageUrl:
+      "https://www.nasa.gov/sites/default/files/styles/full_width/public/thumbnails/image/web_first_images_release.png?itok=g21NrdRw",
   },
 ];
 const USERS = [
@@ -47,8 +52,25 @@ const USERS = [
 ];
 
 const Portfolio = () => {
+  const [showConfirmModal, setShowConfirmModal] = useState(false);
+
   const portfolioId = useParams().portfolioId;
   const userId = useParams().userId;
+
+  const auth = useContext(AuthContext);
+
+  const showDeleteWarningHandler = () => {
+    setShowConfirmModal(true);
+  };
+
+  const cancelDeleteHandler = () => {
+    setShowConfirmModal(false);
+  };
+
+  const confirmDeleteHandler = () => {
+    setShowConfirmModal(false);
+    console.log("DELETING...");
+  };
 
   const portfolio = DUMMY_PORTFOLIOS.filter(
     (portfolio) => portfolio.id === portfolioId
@@ -57,6 +79,27 @@ const Portfolio = () => {
 
   return (
     <ul>
+      <Modal
+        show={showConfirmModal}
+        onCancel={cancelDeleteHandler}
+        header="Are you sure?"
+        footerClass="portfolio-item__modal-actions"
+        footer={
+          <React.Fragment>
+            <Button inverse onClick={cancelDeleteHandler}>
+              CANCEL
+            </Button>
+            <Button danger onClick={confirmDeleteHandler}>
+              DELETE
+            </Button>
+          </React.Fragment>
+        }
+      >
+        <p>
+          Do you want to permanently delete this portfolio? Please note that
+          this cannot be undone.
+        </p>
+      </Modal>
       <li className="portf-item">
         <div className="portf-item__image">
           <Avatar image={user.image} alt={user.name} />
@@ -70,6 +113,17 @@ const Portfolio = () => {
             </div>
           </h2>
         </div>
+      </li>
+      <li>
+        {auth.isLoggedIn && (
+          <Button to={`/${userId}/portfolios/${portfolioId}/edit`}>EDIT</Button>
+        )}
+
+        {auth.isLoggedIn && (
+          <Button danger onClick={showDeleteWarningHandler}>
+            DELETE
+          </Button>
+        )}
       </li>
       <li></li>
     </ul>
