@@ -1,4 +1,4 @@
-.user-item {
+.portf-item {
   margin: 1rem;
   width: calc(90% - 2rem);
   min-width: 17.5rem;
@@ -6,7 +6,7 @@
   position: relative;
 }
 
-.user-item a {
+.portf-item a {
   display: flex;
   align-items: center;
   width: 100%;
@@ -17,18 +17,18 @@
   background: rgb(29, 29, 29);
 }
 
-.user-item a:hover,
-.user-item a:active {
+.portf-item a:hover,
+.portf-item a:active {
   /* border: 2px solid #e60045; */
   border-radius: 30px;
   background: rgb(58, 58, 58);
 }
 
-.user-item__content {
+.portf-item__content {
   padding: 0;
 }
 
-.user-item__image {
+.portf-item__image {
   width: 7rem;
   height: 7rem;
   margin-right: 4rem;
@@ -36,7 +36,7 @@
   margin: 0;
 }
 
-.user-item__info h2 {
+.portf-item__info h2 {
   font-size: 1.5rem;
   /* margin: 0 0 0.5rem 0; */
   align-content: center;
@@ -51,29 +51,29 @@
   transform: translateY(-50%);
 }
 
-/* .user-item:hover h2,
-.user-item:active h2,
-.user-item:hover h3,
-.user-item:active h3 {
+/* .portf-item:hover h2,
+.portf-item:active h2,
+.portf-item:hover h3,
+.portf-item:active h3 {
   color: #292929;
 } */
 
-.user-item__info {
+.portf-item__info {
   display: inline-block;
 }
 
-.user-item__info h1 {
+.portf-item__info h1 {
   margin: 0;
   color: #ffffff;
   align-content: center;
 }
 
-.user-item__info h3 {
+.portf-item__info h3 {
   margin: 0;
   color: #e60045;
 }
 
-.users-list {
+.portfs-list {
   list-style: none;
   margin: 0 auto;
   padding: 0;

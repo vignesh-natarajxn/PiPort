@@ -57,11 +57,11 @@ const Portfolio = () => {
 
   return (
     <ul>
-      <li className="user-item">
-        <div className="user-item__image">
+      <li className="portf-item">
+        <div className="portf-item__image">
           <Avatar image={user.image} alt={user.name} />
         </div>
-        <div className="user-item__info">
+        <div className="portf-item__info">
           <h2>
             {user.name}
             {" - "}
