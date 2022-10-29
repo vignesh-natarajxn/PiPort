@@ -218,7 +218,7 @@ const Portfolio = () => {
   const user = USERS.filter((user) => user.id === userId)[0];
 
   return (
-    <ul className='portfolio'>
+    <ul className="portfolio">
       <Modal
         show={showConfirmModal}
         onCancel={cancelDeleteHandler}
@@ -255,17 +255,16 @@ const Portfolio = () => {
           </h2>
         </div>
       </li>
-      <li>
-        {auth.isLoggedIn && (
-          <Button to={`/${userId}/portfolios/${portfolioId}/edit`}>Edit</Button>
-        )}
-
-        {auth.isLoggedIn && (
-          <Button danger onClick={showDeleteWarningHandler}>
-            Delete
+      {auth.isLoggedIn && (
+        <li style={{ textAlign: "center" }}>
+          <Button to={`/${userId}/portfolios/${portfolioId}/edit`}>
+            Edit Portfolio
           </Button>
-        )}
-      </li>
+          <Button danger onClick={showDeleteWarningHandler}>
+            Delete Portfolio
+          </Button>
+        </li>
+      )}
 
       {portfolio.components.map((component) => (
         <li>
