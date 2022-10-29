@@ -19,6 +19,13 @@ const DUMMY_PORTFOLIOS = [
     description: "I like to type stuff.",
     imageUrl:
       "https://cutewallpaper.org/22/minimal-programming-wallpapers/930213660.jpg",
+    components: [
+      {
+        title: "",
+        description: "",
+        image: "",
+      },
+    ],
   },
   {
     id: "u1r2",
@@ -26,6 +33,13 @@ const DUMMY_PORTFOLIOS = [
     title: "Embedded Firmware Developer",
     description: "I give life to computers.",
     imageUrl: "https://cdn.wallpapersafari.com/23/71/Ow4QZ5.png",
+    components: [
+      {
+        title: "",
+        description: "",
+        image: "",
+      },
+    ],
   },
   {
     id: "u2r1",
@@ -34,6 +48,13 @@ const DUMMY_PORTFOLIOS = [
     description: "I am your creator.",
     imageUrl:
       "https://www.nasa.gov/sites/default/files/styles/full_width/public/thumbnails/image/web_first_images_release.png?itok=g21NrdRw",
+    components: [
+      {
+        title: "",
+        description: "",
+        image: "",
+      },
+    ],
   },
 ];
 

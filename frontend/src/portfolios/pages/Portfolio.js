@@ -22,6 +22,7 @@ const DUMMY_PORTFOLIOS = [
       {
         title: "",
         description: "",
+        image: "",
       },
     ],
   },
@@ -35,6 +36,7 @@ const DUMMY_PORTFOLIOS = [
       {
         title: "",
         description: "",
+        image: "",
       },
     ],
   },
@@ -49,6 +51,7 @@ const DUMMY_PORTFOLIOS = [
       {
         title: "",
         description: "",
+        image: "",
       },
     ],
   },
@@ -129,6 +132,7 @@ const Portfolio = () => {
             <div style={{ color: "#a5a5a5", display: "inline-block" }}>
               {portfolio.title}
             </div>
+            <div style={{ fontSize: "15pt" }}>{portfolio.description}</div>
           </h2>
         </div>
       </li>
