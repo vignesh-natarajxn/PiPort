@@ -1,5 +1,5 @@
 .portf-item {
-  margin: 1rem;
+  /* margin: 1rem; */
   width: calc(90% - 2rem);
   min-width: 17.5rem;
   height: 120px;
@@ -12,7 +12,7 @@
   width: 100%;
   height: 100%;
   text-decoration: none;
-  padding: 2rem;
+  /* padding: 2rem; */
   color: white;
   background: rgb(29, 29, 29);
 }
@@ -31,16 +31,16 @@
 .portf-item__image {
   width: 7rem;
   height: 7rem;
-  margin-right: 4rem;
+  /* margin-right: 4rem; */
   display: inline-block;
-  margin: 0;
+  /* margin: 0; */
 }
 
 .portf-item__info h2 {
   font-size: 1.5rem;
   /* margin: 0 0 0.5rem 0; */
-  align-content: center;
-  align-items: center;
+  /* align-content: center; */
+  /* align-items: center; */
   font-weight: normal;
   color: #ffffff;
   margin: 0;
@@ -63,9 +63,9 @@
 }
 
 .portf-item__info h1 {
-  margin: 0;
+  /* margin: 0; */
   color: #ffffff;
-  align-content: center;
+  /* align-content: center; */
 }
 
 .portf-item__info h3 {
@@ -83,5 +83,10 @@
   justify-content: center;
   flex-wrap: wrap;
   color: #a5a5a5;
-  
+}
+
+.component-main {
+}
+
+.component-sub {
 }
