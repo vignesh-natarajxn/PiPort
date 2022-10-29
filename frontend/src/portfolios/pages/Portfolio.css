@@ -1,9 +1,16 @@
+.portfolio {
+  margin-right: 20px;
+  padding-right: 20px;
+}
+
 .portf-item {
   /* margin: 1rem; */
   width: calc(90% - 2rem);
   min-width: 17.5rem;
   height: 120px;
   position: relative;
+  margin-right: 20px;
+  padding-right: 20px;
 }
 
 .portf-item a {

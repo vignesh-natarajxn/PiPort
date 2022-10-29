@@ -218,7 +218,7 @@ const Portfolio = () => {
   const user = USERS.filter((user) => user.id === userId)[0];
 
   return (
-    <ul>
+    <ul className='portfolio'>
       <Modal
         show={showConfirmModal}
         onCancel={cancelDeleteHandler}
