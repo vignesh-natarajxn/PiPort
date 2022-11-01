@@ -173,6 +173,12 @@ router.get("/:pid", (req, res, next) => {
   const portfolio = DUMMY_PORTFOLIOS.find((p) => {
     return p.id === portfolioId;
   });
+
+  if (!portfolio) {
+    const error = new Error("Could not find a portfolio for the provided id.");
+    error.code = 404;
+    throw error;
+  }
   res.json({ portfolio }); // => { portfolio } => { portfolio: portfolio }
 });
 
@@ -182,6 +188,14 @@ router.get("/user/:uid", (req, res, next) => {
   const portfolio = DUMMY_PORTFOLIOS.find((p) => {
     return p.creator === userId;
   });
+
+  if (!portfolio) {
+    const error = new Error(
+      "Could not find a portfolio for the provided user id."
+    );
+    error.code = 404;
+    return next(error);
+  }
 
   res.json({ portfolio });
 });
