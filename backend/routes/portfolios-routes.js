@@ -6,7 +6,7 @@ const router = express.Router();
 
 router.get("/:pid", portfoliosControllers.getPortfolioById);
 
-router.get("/user/:uid", portfoliosControllers.getPortfolioByUserId);
+router.get("/user/:uid", portfoliosControllers.getPortfoliosByUserId);
 
 router.post("/", portfoliosControllers.createPortfolio);
 

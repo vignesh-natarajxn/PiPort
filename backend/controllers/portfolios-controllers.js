@@ -185,20 +185,23 @@ const getPortfolioById = (req, res, next) => {
 // function getPortfolioById() { ... }
 // const getPortfolioById = function() { ... }
 
-const getPortfolioByUserId = (req, res, next) => {
+const getPortfoliosByUserId = (req, res, next) => {
   const userId = req.params.uid;
 
-  const portfolio = DUMMY_PORTFOLIOS.find((p) => {
+  const portfolios = DUMMY_PORTFOLIOS.filter((p) => {
     return p.creator === userId;
   });
 
-  if (!portfolio) {
+  if (!portfolios || portfolios.length === 0) {
     return next(
-      new HttpError("Could not find a portfolio for the provided user id.", 404)
+      new HttpError(
+        "Could not find a portfolios for the provided user id.",
+        404
+      )
     );
   }
 
-  res.json({ portfolio });
+  res.json({ portfolios });
 };
 
 const createPortfolio = (req, res, next) => {
@@ -243,7 +246,7 @@ const deletePortfolio = (req, res, next) => {
 };
 
 exports.getPortfolioById = getPortfolioById;
-exports.getPortfolioByUserId = getPortfolioByUserId;
+exports.getPortfoliosByUserId = getPortfoliosByUserId;
 exports.createPortfolio = createPortfolio;
 exports.updatePortfolio = updatePortfolio;
 exports.deletePortfolio = deletePortfolio;
