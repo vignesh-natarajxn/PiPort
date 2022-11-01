@@ -2,11 +2,13 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const uuid = require("uuid/v4");
 
-const placesRoutes = require("./routes/portfolios-routes");
+const portfoliosRoutes = require("./routes/portfolios-routes");
 
 const app = express();
 
-app.use("/api/portfolios", placesRoutes);
+app.use(bodyParser.json());
+
+app.use("/api/portfolios", portfoliosRoutes);
 
 app.use((error, req, res, next) => {
   if (res.headerSent) {
@@ -15,10 +17,6 @@ app.use((error, req, res, next) => {
   res.status(error.code || 500);
   res.json({ message: error.message || "An unknown error occurred!" });
 });
-
-const DUMMY_PRODUCTS = []; // not a database, just some in-memory storage for now
-
-app.use(bodyParser.json());
 
 // CORS Headers => Required for cross-origin/ cross-server communication
 app.use((req, res, next) => {

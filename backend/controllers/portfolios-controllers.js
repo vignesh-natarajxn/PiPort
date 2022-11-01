@@ -200,20 +200,20 @@ const getPortfolioByUserId = (req, res, next) => {
 };
 
 const createPortfolio = (req, res, next) => {
-  const { title, description, coordinates, address, creator } = req.body;
+  const { creator, title, description, imageUrl, components } = req.body;
   // const title = req.body.title;
   const createdPortfolio = {
-    id: uuid(),
+    // id: uuid(),
+    creator,
     title,
     description,
-    location: coordinates,
-    address,
-    creator
+    imageUrl,
+    components,
   };
 
-  DUMMY_PLACES.push(createdPortfolio); //unshift(createdPortfolio)
+  DUMMY_PORTFOLIOS.push(createdPortfolio); //unshift(createdPortfolio)
 
-  res.status(201).json({place: createdPortfolio});
+  res.status(201).json({ portfolio: createdPortfolio });
 };
 
 exports.getPortfolioById = getPortfolioById;
