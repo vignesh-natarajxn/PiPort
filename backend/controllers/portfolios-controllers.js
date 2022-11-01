@@ -2,7 +2,7 @@ const uuid = require("uuid/v4");
 
 const HttpError = require("../models/http-error");
 
-const DUMMY_PORTFOLIOS = [
+let DUMMY_PORTFOLIOS = [
   {
     id: "u1r1",
     creator: "u1",
