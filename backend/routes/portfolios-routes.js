@@ -168,13 +168,22 @@ const DUMMY_PORTFOLIOS = [
   },
 ];
 
-router.get('/:pid', (req, res, next) => {
+router.get("/:pid", (req, res, next) => {
   const portfolioId = req.params.pid; // { pid: 'p1' }
-  const portfolio = DUMMY_PORTFOLIOS.find(p => {
+  const portfolio = DUMMY_PORTFOLIOS.find((p) => {
     return p.id === portfolioId;
   });
-  res.json({portfolio}); // => { portfolio } => { portfolio: portfolio }
+  res.json({ portfolio }); // => { portfolio } => { portfolio: portfolio }
 });
 
+router.get("/user/:uid", (req, res, next) => {
+  const userId = req.params.uid;
+
+  const portfolio = DUMMY_PORTFOLIOS.find((p) => {
+    return p.creator === userId;
+  });
+
+  res.json({ portfolio });
+});
 
 module.exports = router;
