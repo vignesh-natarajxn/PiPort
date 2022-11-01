@@ -10,4 +10,8 @@ router.get("/user/:uid", portfoliosControllers.getPortfolioByUserId);
 
 router.post("/", portfoliosControllers.createPortfolio);
 
+router.patch("/:pid", portfoliosControllers.updatePortfolio);
+
+router.delete("/:pid", portfoliosControllers.deletePortfolio);
+
 module.exports = router;

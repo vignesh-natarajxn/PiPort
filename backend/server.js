@@ -3,12 +3,18 @@ const bodyParser = require("body-parser");
 const uuid = require("uuid/v4");
 
 const portfoliosRoutes = require("./routes/portfolios-routes");
+const HttpError = require("./models/http-error");
 
 const app = express();
 
 app.use(bodyParser.json());
 
 app.use("/api/portfolios", portfoliosRoutes);
+
+app.use((req, res, next) => {
+  const error = new HttpError("Could not find this route.", 404);
+  throw error;
+});
 
 app.use((error, req, res, next) => {
   if (res.headerSent) {

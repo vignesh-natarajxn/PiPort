@@ -1,3 +1,5 @@
+const uuid = require("uuid/v4");
+
 const HttpError = require("../models/http-error");
 
 const DUMMY_PORTFOLIOS = [
@@ -203,7 +205,7 @@ const createPortfolio = (req, res, next) => {
   const { creator, title, description, imageUrl, components } = req.body;
   // const title = req.body.title;
   const createdPortfolio = {
-    // id: uuid(),
+    id: uuid(),
     creator,
     title,
     description,
@@ -216,6 +218,28 @@ const createPortfolio = (req, res, next) => {
   res.status(201).json({ portfolio: createdPortfolio });
 };
 
+const updatePortfolio = (req, res, next) => {
+  const { title, description } = req.body;
+  const portfolioId = req.params.pid;
+
+  const updatedPortfolio = {
+    ...DUMMY_PORTFOLIOS.find((p) => p.id === portfolioId),
+  };
+  const portfolioIndex = DUMMY_PORTFOLIOS.findIndex(
+    (p) => p.id === portfolioId
+  );
+  updatedPortfolio.title = title;
+  updatedPortfolio.description = description;
+
+  DUMMY_PORTFOLIOS[portfolioIndex] = updatedPortfolio;
+
+  res.status(200).json({ portfolio: updatedPortfolio });
+};
+
+const deletePortfolio = (req, res, next) => {};
+
 exports.getPortfolioById = getPortfolioById;
 exports.getPortfolioByUserId = getPortfolioByUserId;
 exports.createPortfolio = createPortfolio;
+exports.updatePortfolio = updatePortfolio;
+exports.deletePortfolio = deletePortfolio;
