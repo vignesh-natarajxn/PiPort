@@ -236,7 +236,11 @@ const updatePortfolio = (req, res, next) => {
   res.status(200).json({ portfolio: updatedPortfolio });
 };
 
-const deletePortfolio = (req, res, next) => {};
+const deletePortfolio = (req, res, next) => {
+  const portfolioId = req.params.pid;
+  DUMMY_PORTFOLIOS = DUMMY_PORTFOLIOS.filter((p) => p.id !== portfolioId);
+  res.status(200).json({ message: "Deleted portfolio." });
+};
 
 exports.getPortfolioById = getPortfolioById;
 exports.getPortfolioByUserId = getPortfolioByUserId;
