@@ -254,7 +254,7 @@ const createPortfolio = async (req, res, next) => {
   res.status(201).json({ portfolio: createdPortfolio });
 };
 
-const updatePortfolio = (req, res, next) => {
+const updatePortfolio = async (req, res, next) => {
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
     throw new HttpError("Invalid inputs passed, please check your data.", 422);
@@ -263,18 +263,25 @@ const updatePortfolio = (req, res, next) => {
   const { title, description } = req.body;
   const portfolioId = req.params.pid;
 
-  const updatedPortfolio = {
-    ...DUMMY_PORTFOLIOS.find((p) => p.id === portfolioId),
-  };
-  const portfolioIndex = DUMMY_PORTFOLIOS.findIndex(
-    (p) => p.id === portfolioId
-  );
-  updatedPortfolio.title = title;
-  updatedPortfolio.description = description;
+  let portfolio;
+  try {
+    portfolio = await Portfolio.findById(portfolioId);
+  } catch (err) {
+    const error = new HttpError("Could not update the Portfolio", 500);
+    return next(error);
+  }
 
-  DUMMY_PORTFOLIOS[portfolioIndex] = updatedPortfolio;
+  portfolio.title = title;
+  portfolio.description = description;
 
-  res.status(200).json({ portfolio: updatedPortfolio });
+  try {
+    await portfolio.save();
+  } catch (err) {
+    const error = new HttpError("Could not update the Portfolio", 500);
+    return next(error);
+  }
+
+  res.status(200).json({ portfolio: portfolio.toObject({ getters: true }) });
 };
 
 const deletePortfolio = (req, res, next) => {
