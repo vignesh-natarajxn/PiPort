@@ -284,12 +284,24 @@ const updatePortfolio = async (req, res, next) => {
   res.status(200).json({ portfolio: portfolio.toObject({ getters: true }) });
 };
 
-const deletePortfolio = (req, res, next) => {
+const deletePortfolio = async (req, res, next) => {
   const portfolioId = req.params.pid;
-  if (!DUMMY_PORTFOLIOS.find((p) => p.id === portfolioId)) {
-    throw new HttpError("Could not find a portfolio for that id.", 404);
+
+  let portfolio;
+  try {
+    portfolio = await Portfolio.findById(portfolioId);
+  } catch (err) {
+    const error = new HttpError("Could not delete the Portfolio", 500);
+    return next(error);
   }
-  DUMMY_PORTFOLIOS = DUMMY_PORTFOLIOS.filter((p) => p.id !== portfolioId);
+
+  try {
+    await portfolio.remove();
+  } catch (err) {
+    const error = new HttpError("Could not delete the Portfolio", 500);
+    return next(error);
+  }
+
   res.status(200).json({ message: "Deleted portfolio." });
 };
 
