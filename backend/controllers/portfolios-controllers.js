@@ -3,6 +3,7 @@ const { validationResult } = require("express-validator");
 
 const HttpError = require("../models/http-error");
 const getCoordsForAddress = require("../util/location");
+const Portfolio = require("../models/portfolio");
 
 let DUMMY_PORTFOLIOS = [
   {
@@ -211,26 +212,31 @@ const createPortfolio = async (req, res, next) => {
     );
   }
 
-  const { title, description, address, creator } = req.body;
+  const { creator, title, description, image, components } = req.body;
 
-  let coordinates;
-  try {
-    coordinates = await getCoordsForAddress(address);
-  } catch (error) {
-    return next(error);
-  }
+  // let coordinates;
+  // try {
+  //   coordinates = await getCoordsForAddress(address);
+  // } catch (error) {
+  //   return next(error);
+  // }
 
   // const title = req.body.title;
-  const createdPortfolio = {
-    id: uuid(),
+  const createdPortfolio = new Portfolio({
+    // id: uuid(),
+    creator,
     title,
     description,
-    location: coordinates,
-    address,
-    creator,
-  };
+    image,
+    components,
+  });
 
-  DUMMY_PORTFOLIOS.push(createdPortfolio); //unshift(createdPortfolio)
+  try {
+    await createdPortfolio.save();
+  } catch (err) {
+    const error = new HttpError("Creating Portfolio Failed", 500);
+    return next(error);
+  }
 
   res.status(201).json({ portfolio: createdPortfolio });
 };
@@ -244,8 +250,12 @@ const updatePortfolio = (req, res, next) => {
   const { title, description } = req.body;
   const portfolioId = req.params.pid;
 
-  const updatedPortfolio = { ...DUMMY_PORTFOLIOS.find((p) => p.id === portfolioId) };
-  const portfolioIndex = DUMMY_PORTFOLIOS.findIndex((p) => p.id === portfolioId);
+  const updatedPortfolio = {
+    ...DUMMY_PORTFOLIOS.find((p) => p.id === portfolioId),
+  };
+  const portfolioIndex = DUMMY_PORTFOLIOS.findIndex(
+    (p) => p.id === portfolioId
+  );
   updatedPortfolio.title = title;
   updatedPortfolio.description = description;
 
