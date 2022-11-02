@@ -1,6 +1,8 @@
 const uuid = require("uuid/v4");
+const { validationResult } = require("express-validator");
 
 const HttpError = require("../models/http-error");
+const getCoordsForAddress = require("../util/location");
 
 let DUMMY_PORTFOLIOS = [
   {
@@ -194,26 +196,38 @@ const getPortfoliosByUserId = (req, res, next) => {
 
   if (!portfolios || portfolios.length === 0) {
     return next(
-      new HttpError(
-        "Could not find a portfolios for the provided user id.",
-        404
-      )
+      new HttpError("Could not find portfolios for the provided user id.", 404)
     );
   }
 
   res.json({ portfolios });
 };
 
-const createPortfolio = (req, res, next) => {
-  const { creator, title, description, imageUrl, components } = req.body;
+const createPortfolio = async (req, res, next) => {
+  const errors = validationResult(req);
+  if (!errors.isEmpty()) {
+    return next(
+      new HttpError("Invalid inputs passed, please check your data.", 422)
+    );
+  }
+
+  const { title, description, address, creator } = req.body;
+
+  let coordinates;
+  try {
+    coordinates = await getCoordsForAddress(address);
+  } catch (error) {
+    return next(error);
+  }
+
   // const title = req.body.title;
   const createdPortfolio = {
     id: uuid(),
-    creator,
     title,
     description,
-    imageUrl,
-    components,
+    location: coordinates,
+    address,
+    creator,
   };
 
   DUMMY_PORTFOLIOS.push(createdPortfolio); //unshift(createdPortfolio)
@@ -222,15 +236,16 @@ const createPortfolio = (req, res, next) => {
 };
 
 const updatePortfolio = (req, res, next) => {
+  const errors = validationResult(req);
+  if (!errors.isEmpty()) {
+    throw new HttpError("Invalid inputs passed, please check your data.", 422);
+  }
+
   const { title, description } = req.body;
   const portfolioId = req.params.pid;
 
-  const updatedPortfolio = {
-    ...DUMMY_PORTFOLIOS.find((p) => p.id === portfolioId),
-  };
-  const portfolioIndex = DUMMY_PORTFOLIOS.findIndex(
-    (p) => p.id === portfolioId
-  );
+  const updatedPortfolio = { ...DUMMY_PORTFOLIOS.find((p) => p.id === portfolioId) };
+  const portfolioIndex = DUMMY_PORTFOLIOS.findIndex((p) => p.id === portfolioId);
   updatedPortfolio.title = title;
   updatedPortfolio.description = description;
 
@@ -241,6 +256,9 @@ const updatePortfolio = (req, res, next) => {
 
 const deletePortfolio = (req, res, next) => {
   const portfolioId = req.params.pid;
+  if (!DUMMY_PORTFOLIOS.find((p) => p.id === portfolioId)) {
+    throw new HttpError("Could not find a portfolio for that id.", 404);
+  }
   DUMMY_PORTFOLIOS = DUMMY_PORTFOLIOS.filter((p) => p.id !== portfolioId);
   res.status(200).json({ message: "Deleted portfolio." });
 };
