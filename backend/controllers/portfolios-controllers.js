@@ -171,29 +171,38 @@ let DUMMY_PORTFOLIOS = [
   },
 ];
 
-const getPortfolioById = (req, res, next) => {
+const getPortfolioById = async (req, res, next) => {
   const portfolioId = req.params.pid; // { pid: 'p1' }
 
-  const portfolio = DUMMY_PORTFOLIOS.find((p) => {
-    return p.id === portfolioId;
-  });
-
-  if (!portfolio) {
-    throw new HttpError("Could not find a portfolio for the provided id.", 404);
+  let portfolio;
+  try {
+    portfolio = await Portfolio.findById(portfolioId);
+  } catch (err) {
+    const error = new HttpError("Could not find the Portfolio", 500);
+    return next(error);
   }
 
-  res.json({ portfolio }); // => { portfolio } => { portfolio: portfolio }
+  if (!portfolio) {
+    const error = new HttpError(
+      "Could not find a portfolio for the provided id.",
+      404
+    );
+    return next(error);
+  }
+
+  res.json({ portfolio: portfolio.toObject({ getters: true }) });
 };
 
-// function getPortfolioById() { ... }
-// const getPortfolioById = function() { ... }
-
-const getPortfoliosByUserId = (req, res, next) => {
+const getPortfoliosByUserId = async (req, res, next) => {
   const userId = req.params.uid;
 
-  const portfolios = DUMMY_PORTFOLIOS.filter((p) => {
-    return p.creator === userId;
-  });
+  let portfolios;
+  try {
+    portfolios = await Portfolio.find({ creator: userId });
+  } catch (err) {
+    const error = new HttpError("Could not fetch Portfolios", 500);
+    return next(error);
+  }
 
   if (!portfolios || portfolios.length === 0) {
     return next(
@@ -201,7 +210,11 @@ const getPortfoliosByUserId = (req, res, next) => {
     );
   }
 
-  res.json({ portfolios });
+  res.json({
+    portfolios: portfolios.map((portfolio) =>
+      portfolio.toObject({ getters: true })
+    ),
+  });
 };
 
 const createPortfolio = async (req, res, next) => {
