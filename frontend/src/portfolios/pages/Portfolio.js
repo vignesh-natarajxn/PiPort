@@ -16,7 +16,7 @@ const DUMMY_PORTFOLIOS = [
     creator: "u1",
     title: "Software Development Engineer",
     description: "I like to type stuff.",
-    imageUrl:
+    image:
       "https://cutewallpaper.org/22/minimal-programming-wallpapers/930213660.jpg",
     components: [
       {
@@ -72,7 +72,7 @@ const DUMMY_PORTFOLIOS = [
     creator: "u1",
     title: "Embedded Firmware Developer",
     description: "I give life to computers.",
-    imageUrl: "https://cdn.wallpapersafari.com/23/71/Ow4QZ5.png",
+    image: "https://cdn.wallpapersafari.com/23/71/Ow4QZ5.png",
     components: [
       {
         title: "Professional Experience",
@@ -127,7 +127,7 @@ const DUMMY_PORTFOLIOS = [
     creator: "u2",
     title: "Chief Executive Officer - Earth",
     description: "I am your creator.",
-    imageUrl:
+    image:
       "https://www.nasa.gov/sites/default/files/styles/full_width/public/thumbnails/image/web_first_images_release.png?itok=g21NrdRw",
     components: [
       {
