@@ -27,7 +27,7 @@ const UsersList = (props) => {
               <div className="user-item__info">
                 <h2>{user.name}</h2>
                 <h3>
-                  {user.portfolios}{" "}
+                  {user.portfolios.length}{" "}
                   {user.portfolios === 1 ? "Portfolio" : "Portfolios"}
                 </h3>
               </div>
