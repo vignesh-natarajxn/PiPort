@@ -1,9 +1,11 @@
 const uuid = require("uuid/v4");
 const { validationResult } = require("express-validator");
+const mongoose = require("mongoose");
 
 const HttpError = require("../models/http-error");
 const getCoordsForAddress = require("../util/location");
 const Portfolio = require("../models/portfolio");
+const User = require("../models/user");
 
 let DUMMY_PORTFOLIOS = [
   {
@@ -244,10 +246,34 @@ const createPortfolio = async (req, res, next) => {
     components,
   });
 
+  let user;
   try {
-    await createdPortfolio.save();
+    user = await User.findById(creator);
   } catch (err) {
-    const error = new HttpError("Creating Portfolio Failed", 500);
+    const error = new HttpError(
+      "Creating portfolio failed, please try again",
+      500
+    );
+    return next(error);
+  }
+
+  if (!user) {
+    const error = new HttpError("Could not find user for provided id", 404);
+    return next(error);
+  }
+
+  try {
+    const sess = await mongoose.startSession();
+    sess.startTransaction();
+    await createdPortfolio.save({ session: sess });
+    user.portfolios.push(createdPortfolio);
+    await user.save({ session: sess });
+    await sess.commitTransaction();
+  } catch (err) {
+    const error = new HttpError(
+      "Creating portfolio failed, please try again.",
+      500
+    );
     return next(error);
   }
 
@@ -291,7 +317,7 @@ const deletePortfolio = async (req, res, next) => {
 
   let portfolio;
   try {
-    portfolio = await Portfolio.findById(portfolioId);
+    portfolio = await Portfolio.findById(portfolioId).populate("creator");
   } catch (err) {
     const error = new HttpError("Could not delete the Portfolio", 500);
     return next(error);
