@@ -200,12 +200,14 @@ const getPortfoliosByUserId = async (req, res, next) => {
 
   let portfolios;
   try {
+    // userWithPlaces = await User.findById(userId).populate("places");
     portfolios = await Portfolio.find({ creator: userId });
   } catch (err) {
     const error = new HttpError("Could not fetch Portfolios", 500);
     return next(error);
   }
 
+  // if (!userWithPlaces || userWithPlaces.places.length === 0) {
   if (!portfolios || portfolios.length === 0) {
     return next(
       new HttpError("Could not find portfolios for the provided user id.", 404)
@@ -323,10 +325,23 @@ const deletePortfolio = async (req, res, next) => {
     return next(error);
   }
 
+  if (!portfolio) {
+    const error = new HttpError("Could not find portfolio for this id.", 404);
+    return next(error);
+  }
+
   try {
-    await portfolio.remove();
+    const sess = await mongoose.startSession();
+    sess.startTransaction();
+    await portfolio.remove({ session: sess });
+    portfolio.creator.portfolios.pull(portfolio);
+    await portfolio.creator.save({ session: sess });
+    await sess.commitTransaction();
   } catch (err) {
-    const error = new HttpError("Could not delete the Portfolio", 500);
+    const error = new HttpError(
+      "Something went wrong, could not delete portfolio.",
+      500
+    );
     return next(error);
   }
 
