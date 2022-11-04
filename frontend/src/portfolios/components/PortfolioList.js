@@ -28,7 +28,7 @@ const PortfolioList = (props) => {
         <PortfolioItem
           key={portfolio.id}
           id={portfolio.id}
-          image={portfolio.imageUrl}
+          image={portfolio.image}
           title={portfolio.title}
           description={portfolio.description}
           creatorId={portfolio.creator}
