@@ -78,9 +78,10 @@ const NewPortfolio = () => {
           onInput={inputHandler}
         />
         <Input
-          id="address"
+          id="image"
           element="input"
-          label="Address"
+          type="text"
+          label="Image"
           validators={[VALIDATOR_REQUIRE()]}
           errorText="Please enter a valid address."
           onInput={inputHandler}
