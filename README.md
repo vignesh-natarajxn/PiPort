@@ -1,10 +1,5 @@
 # Docker
 
-Docker-compose
-```shell
-
-``` 
-
 Build image (dockerfile in same folder):
 ```shell
 docker build .
@@ -25,4 +20,9 @@ Stop a container:
 docker stop <name>
 ```
 
+# MERN
 
+Frontend and Backend (from respective root folders):
+```shell
+npm start
+```
