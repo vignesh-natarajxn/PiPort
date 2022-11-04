@@ -1,5 +1,9 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import { useParams } from "react-router-dom";
+
+import ErrorModal from "../../shared/components/UIElements/ErrorModal";
+import LoadingSpinner from "../../shared/components/UIElements/LoadingSpinner";
+import { useHttpClient } from "../../shared/hooks/http-hook";
 
 import Button from "../../shared/components/FormElements/Button";
 import Avatar from "../../shared/components/UIElements/Avatar";
@@ -192,6 +196,9 @@ const USERS = [
 ];
 
 const Portfolio = () => {
+  const [loadedPortfolios, setLoadedPortfolios] = useState();
+  const { isLoading, error, sendRequest, clearError } = useHttpClient();
+
   const [showConfirmModal, setShowConfirmModal] = useState(false);
 
   const portfolioId = useParams().portfolioId;
@@ -212,9 +219,25 @@ const Portfolio = () => {
     console.log("DELETING...");
   };
 
-  const portfolio = DUMMY_PORTFOLIOS.filter(
+  useEffect(() => {
+    const fetchPortfolios = async () => {
+      try {
+        const responseData = await sendRequest(
+          `http://localhost:5000/api/portfolios/user/${userId}`
+        );
+        setLoadedPortfolios(responseData.portfolios);
+      } catch (err) {}
+    };
+    fetchPortfolios();
+  }, [sendRequest, userId]);
+
+  const portfolio = loadedPortfolios.filter(
     (portfolio) => portfolio.id === portfolioId
-  )[0];
+  );
+
+  // const portfolio = DUMMY_PORTFOLIOS.filter(
+  //   (portfolio) => portfolio.id === portfolioId
+  // )[0];
   const user = USERS.filter((user) => user.id === userId)[0];
 
   return (
@@ -240,73 +263,81 @@ const Portfolio = () => {
           this cannot be undone.
         </p>
       </Modal>
-      <li className="portf-item">
-        <div className="portf-item__image">
-          <Avatar image={user.image} alt={user.name} />
+      {isLoading && (
+        <div className="center">
+          <LoadingSpinner />
         </div>
-        <div className="portf-item__info">
-          <h2>
-            {user.name}
-            {" - "}
-            <div style={{ color: "#a5a5a5", display: "inline-block" }}>
-              {portfolio.title}
-            </div>
-            <div style={{ fontSize: "15pt" }}>{portfolio.description}</div>
-          </h2>
-        </div>
-      </li>
-      {auth.isLoggedIn && (
-        <li style={{ textAlign: "center" }}>
-          <Button to={`/${userId}/portfolios/${portfolioId}/edit`}>
-            Edit Portfolio
-          </Button>
-          <Button danger onClick={showDeleteWarningHandler}>
-            Delete Portfolio
-          </Button>
-        </li>
       )}
-
-      {portfolio.components.map((component) => (
-        <li>
-          <div
-            style={{
-              fontSize: "20pt",
-              color: "#ffffff",
-              paddingTop: "10px",
-              paddingBottom: "10px",
-            }}
-          >
-            {component.title}
-            {component.description}
-          </div>
-          <Card>
-            {component.components.map((subcomponent) => (
-              <>
-                <div
-                  style={{
-                    fontSize: "18pt",
-                    color: "#ffffff",
-                    paddingTop: "10px",
-                    paddingBottom: "10px",
-                  }}
-                >
-                  {subcomponent.title}
+      {!isLoading && loadedPortfolios && (
+        <>
+          <li className="portf-item">
+            <div className="portf-item__image">
+              <Avatar image={user.image} alt={user.name} />
+            </div>
+            <div className="portf-item__info">
+              <h2>
+                {user.name}
+                {" - "}
+                <div style={{ color: "#a5a5a5", display: "inline-block" }}>
+                  {portfolio.title}
                 </div>
-                <div
-                  style={{
-                    fontSize: "15pt",
-                    color: "#ffffff",
-                    paddingTop: "10px",
-                    paddingBottom: "10px",
-                  }}
-                >
-                  {subcomponent.description}
-                </div>
-              </>
-            ))}
-          </Card>
-        </li>
-      ))}
+                <div style={{ fontSize: "15pt" }}>{portfolio.description}</div>
+              </h2>
+            </div>
+          </li>
+          {auth.isLoggedIn && (
+            <li style={{ textAlign: "center" }}>
+              <Button to={`/${userId}/portfolios/${portfolioId}/edit`}>
+                Edit Portfolio
+              </Button>
+              <Button danger onClick={showDeleteWarningHandler}>
+                Delete Portfolio
+              </Button>
+            </li>
+          )}
+          {portfolio.components.map((component) => (
+            <li>
+              <div
+                style={{
+                  fontSize: "20pt",
+                  color: "#ffffff",
+                  paddingTop: "10px",
+                  paddingBottom: "10px",
+                }}
+              >
+                {component.title}
+                {component.description}
+              </div>
+              <Card>
+                {component.components.map((subcomponent) => (
+                  <>
+                    <div
+                      style={{
+                        fontSize: "18pt",
+                        color: "#ffffff",
+                        paddingTop: "10px",
+                        paddingBottom: "10px",
+                      }}
+                    >
+                      {subcomponent.title}
+                    </div>
+                    <div
+                      style={{
+                        fontSize: "15pt",
+                        color: "#ffffff",
+                        paddingTop: "10px",
+                        paddingBottom: "10px",
+                      }}
+                    >
+                      {subcomponent.description}
+                    </div>
+                  </>
+                ))}
+              </Card>
+            </li>
+          ))}
+        </>
+      )}
     </ul>
   );
 };
