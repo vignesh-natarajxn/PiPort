@@ -244,7 +244,8 @@ const createPortfolio = async (req, res, next) => {
     creator,
     title,
     description,
-    image,
+    image:
+      "https://nakedsecurity.sophos.com/wp-content/uploads/sites/2/2019/04/shutterstock_407554567-compressor-1.jpg?resize=780,408",
     components,
   });
 
