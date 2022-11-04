@@ -16,12 +16,12 @@ const NavLinks = (props) => {
       </li>
       {auth.isLoggedIn && (
         <li>
-          <NavLink to="/u1/portfolios">My Portfolios</NavLink>
+          <NavLink to={`/${auth.userId}/portfolios`}>My Portfolios</NavLink>
         </li>
       )}
       {auth.isLoggedIn && (
         <li>
-          <NavLink to="/portfolios/new">New Portfolio</NavLink>
+          <NavLink to={`/${auth.userId}/portfolios/new`}>New Portfolio</NavLink>
         </li>
       )}
       {!auth.isLoggedIn && (
