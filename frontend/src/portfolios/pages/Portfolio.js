@@ -1,5 +1,5 @@
 import React, { useState, useContext, useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useHistory } from "react-router-dom";
 
 import ErrorModal from "../../shared/components/UIElements/ErrorModal";
 import LoadingSpinner from "../../shared/components/UIElements/LoadingSpinner";
@@ -184,6 +184,7 @@ const Portfolio = () => {
   const [loadedUser, setLoadedUser] = useState();
   const [loadedPortfolio, setLoadedPortfolio] = useState();
   const { isLoading, error, sendRequest, clearError } = useHttpClient();
+  const history = useHistory();
 
   const [showConfirmModal, setShowConfirmModal] = useState(false);
 
@@ -200,9 +201,16 @@ const Portfolio = () => {
     setShowConfirmModal(false);
   };
 
-  const confirmDeleteHandler = () => {
+  const confirmDeleteHandler = async () => {
     setShowConfirmModal(false);
-    console.log("DELETING...");
+    try {
+      await sendRequest(
+        `http://localhost:5000/api/portfolios/${portfolioId}`,
+        "DELETE"
+      );
+      // props.onDelete(props.id);
+      history.push(`/${userId}/portfolios`);
+    } catch (err) {}
   };
 
   useEffect(() => {
@@ -229,6 +237,7 @@ const Portfolio = () => {
 
   return (
     <ul className="portfolio">
+      <ErrorModal error={error} onClear={clearError} />
       <Modal
         show={showConfirmModal}
         onCancel={cancelDeleteHandler}

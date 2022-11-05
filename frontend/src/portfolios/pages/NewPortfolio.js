@@ -51,7 +51,7 @@ const NewPortfolio = () => {
         }),
         { "Content-Type": "application/json" }
       );
-      history.push("/");
+      history.push(`/${auth.userId}/portfolios`);
     } catch (err) {}
   };
 
