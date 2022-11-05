@@ -179,24 +179,10 @@ const DUMMY_PORTFOLIOS = [
     ],
   },
 ];
-const USERS = [
-  {
-    id: "u1",
-    name: "Vignesh Natarajan",
-    image:
-      "https://preview.redd.it/vreph5xqwm311.jpg?auto=webp&s=c130c4e60ef9354cbbe15080a7fc51d521875bf5",
-    portfolios: "2",
-  },
-  {
-    id: "u2",
-    name: "Yilong Musk",
-    image: "https://pbs.twimg.com/media/EbbAWSuXQAIP3Vz?format=jpg&name=large",
-    portfolios: "68",
-  },
-];
 
 const Portfolio = () => {
-  const [loadedPortfolios, setLoadedPortfolios] = useState();
+  const [loadedUser, setLoadedUser] = useState();
+  const [loadedPortfolio, setLoadedPortfolio] = useState();
   const { isLoading, error, sendRequest, clearError } = useHttpClient();
 
   const [showConfirmModal, setShowConfirmModal] = useState(false);
@@ -220,25 +206,26 @@ const Portfolio = () => {
   };
 
   useEffect(() => {
-    const fetchPortfolios = async () => {
+    const fetchUser = async () => {
       try {
         const responseData = await sendRequest(
-          `http://localhost:5000/api/portfolios/user/${userId}`
+          `http://localhost:5000/api/users/${userId}`
         );
-        setLoadedPortfolios(responseData.portfolios);
+        setLoadedUser(responseData.user);
       } catch (err) {}
     };
-    fetchPortfolios();
+    const fetchPortfolio = async () => {
+      try {
+        const responseData = await sendRequest(
+          `http://localhost:5000/api/portfolios/${portfolioId}`
+        );
+        setLoadedPortfolio(responseData.portfolio);
+      } catch (err) {}
+    };
+
+    fetchUser();
+    fetchPortfolio();
   }, [sendRequest, userId]);
-
-  const portfolio = loadedPortfolios.filter(
-    (portfolio) => portfolio.id === portfolioId
-  );
-
-  // const portfolio = DUMMY_PORTFOLIOS.filter(
-  //   (portfolio) => portfolio.id === portfolioId
-  // )[0];
-  const user = USERS.filter((user) => user.id === userId)[0];
 
   return (
     <ul className="portfolio">
@@ -268,20 +255,22 @@ const Portfolio = () => {
           <LoadingSpinner />
         </div>
       )}
-      {!isLoading && loadedPortfolios && (
+      {!isLoading && loadedPortfolio && loadedUser && (
         <>
           <li className="portf-item">
             <div className="portf-item__image">
-              <Avatar image={user.image} alt={user.name} />
+              <Avatar image={loadedUser.image} alt={loadedUser.name} />
             </div>
             <div className="portf-item__info">
               <h2>
-                {user.name}
+                {loadedUser.name}
                 {" - "}
                 <div style={{ color: "#a5a5a5", display: "inline-block" }}>
-                  {portfolio.title}
+                  {loadedPortfolio.title}
                 </div>
-                <div style={{ fontSize: "15pt" }}>{portfolio.description}</div>
+                <div style={{ fontSize: "15pt" }}>
+                  {loadedPortfolio.description}
+                </div>
               </h2>
             </div>
           </li>
@@ -295,7 +284,7 @@ const Portfolio = () => {
               </Button>
             </li>
           )}
-          {portfolio.components.map((component) => (
+          {loadedPortfolio.components.map((component) => (
             <li>
               <div
                 style={{

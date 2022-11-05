@@ -13,7 +13,9 @@ const PortfolioList = (props) => {
     return (
       <div className="portfolio-list center">
         <Card>
-          <h2>No portfolios found. Maybe create one?</h2>
+          <h2 style={{ color: "#ffffff" }}>
+            No portfolios found. Maybe create one?
+          </h2>
           <Button to={`/${auth.userId}/portfolios/new`}>
             Create Portfolio
           </Button>

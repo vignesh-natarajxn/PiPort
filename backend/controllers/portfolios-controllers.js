@@ -208,11 +208,11 @@ const getPortfoliosByUserId = async (req, res, next) => {
   }
 
   // if (!userWithPlaces || userWithPlaces.places.length === 0) {
-  if (!portfolios || portfolios.length === 0) {
-    return next(
-      new HttpError("Could not find portfolios for the provided user id.", 404)
-    );
-  }
+  // if (!portfolios || portfolios.length === 0) {
+  //   return next(
+  //     new HttpError("Could not find portfolios for the provided user id.", 404)
+  //   );
+  // }
 
   res.json({
     portfolios: portfolios.map((portfolio) =>
