@@ -8,6 +8,9 @@ services:
       - "3000:3000"
     networks:
       - piport
+    volumes:
+      - ./frontend/:/app/frontend
+      - /app/frontend/node_modules
 
   api-server:
     image: api-server
@@ -16,7 +19,9 @@ services:
       - "5000:5000"
     networks:
       - piport
-
+    volumes:
+      - ./backend/:/app/backend
+      - /app/backend/node_modules
 networks:
   piport:
     driver: bridge
