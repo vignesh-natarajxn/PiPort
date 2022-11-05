@@ -283,7 +283,7 @@ const Portfolio = () => {
               </h2>
             </div>
           </li>
-          {auth.isLoggedIn && (
+          {auth.userId === userId && (
             <li style={{ textAlign: "center" }}>
               <Button to={`/${userId}/portfolios/${portfolioId}/edit`}>
                 Edit Portfolio
