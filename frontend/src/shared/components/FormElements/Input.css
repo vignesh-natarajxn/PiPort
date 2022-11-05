@@ -15,17 +15,19 @@
 
 .form-control input,
 .form-control textarea {
+  color: #fff;
   width: 100%;
   font: inherit;
   border: 1px solid #ccc;
-  background: #f8f8f8;
+  background: rgb(31, 31, 31);
   padding: 0.15rem 0.25rem;
 }
 
 .form-control input:focus,
 .form-control textarea:focus {
+  color: #fff;
   outline: none;
-  background: #ebebeb;
+  background: rgb(31, 31, 31);
   border-color: #510077;
 }
 
@@ -36,6 +38,7 @@
 
 .form-control--invalid input,
 .form-control--invalid textarea {
+  color: #fff;
   border-color: red;
-  background: #ffd1d1;
+  background: rgb(31, 31, 31);
 }

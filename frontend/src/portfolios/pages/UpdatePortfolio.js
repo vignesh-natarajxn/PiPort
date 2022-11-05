@@ -75,7 +75,7 @@ const UpdatePortfolio = () => {
           "Content-Type": "application/json",
         }
       );
-      history.push("/" + auth.userId + "/portfolios");
+      history.push("/" + auth.userId + "/portfolios/" + portfolioId);
     } catch (err) {}
   };
 
@@ -120,14 +120,13 @@ const UpdatePortfolio = () => {
             id="description"
             element="textarea"
             label="Description"
-            validators={[VALIDATOR_MINLENGTH(5)]}
-            errorText="Please enter a valid description (min. 5 characters)."
+            validators={[VALIDATOR_MINLENGTH(0)]}
             onInput={inputHandler}
             initialValue={loadedPortfolio.description}
             initialValid={true}
           />
           <Button type="submit" disabled={!formState.isValid}>
-            UPDATE PORTFOLIO
+            Update Portfolio
           </Button>
         </form>
       )}
