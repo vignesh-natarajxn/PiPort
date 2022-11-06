@@ -1,12 +1,3 @@
-const DUMMY_USERS = [
-  {
-    id: "u1",
-    name: "Vignesh Natarajan",
-    email: "vygneys@gmail.com",
-    password: "vygneys",
-  },
-];
-
 const { validationResult } = require("express-validator");
 
 const HttpError = require("../models/http-error");
