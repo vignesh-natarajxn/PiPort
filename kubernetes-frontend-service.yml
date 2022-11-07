@@ -1,0 +1,13 @@
+kind: Service
+apiVersion: v1
+metadata:
+  name: frontend-service
+spec:
+  selector:
+    app: frontend
+  ports:
+    - name: http
+      port: 11040
+      # targetPort: 3000
+      nodePort: 31040
+  type: NodePort
