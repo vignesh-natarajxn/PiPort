@@ -9,16 +9,12 @@ const portfolioSchema = new Schema({
   image: { type: String, required: false },
   components: [
     {
-      title: { type: String, required: true },
+      id: { type: Number, required: true },
+      isHeader: { type: Boolean, required: true },
+      title: { type: String, required: false },
+      date: { type: String, required: false },
       description: { type: String, required: false },
       image: { type: String, required: false },
-      components: [
-        {
-          title: { type: String, required: true },
-          description: { type: String, required: false },
-          image: { type: String, required: false },
-        },
-      ],
     },
   ],
 });

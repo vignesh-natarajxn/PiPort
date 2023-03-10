@@ -7,12 +7,12 @@ import { useHttpClient } from "../../shared/hooks/http-hook";
 
 import Button from "../../shared/components/FormElements/Button";
 import Avatar from "../../shared/components/UIElements/Avatar";
-import Card from "../../shared/components/UIElements/Card";
 
 import { AuthContext } from "../../shared/context/auth-context";
 import Modal from "../../shared/components/UIElements/Modal";
 
 import "./Portfolio.css";
+import PortfolioComponent from "./PortfolioComponent";
 
 const Portfolio = () => {
   const [loadedUser, setLoadedUser] = useState();
@@ -106,12 +106,18 @@ const Portfolio = () => {
             </div>
             <div className="portf-item__info">
               <h2>
-                {loadedUser.name}
-                {" - "}
-                <div style={{ color: "#a5a5a5", display: "inline-block" }}>
+                <div
+                  style={{
+                    color: "#e60045",
+                    display: "inline-block",
+                  }}
+                >
+                  {loadedUser.name}{" "}
+                </div>
+                <div style={{ color: "#ffffff", fontSize: "18pt" }}>
                   {loadedPortfolio.title}
                 </div>
-                <div style={{ fontSize: "15pt" }}>
+                <div style={{ color: "#a5a5a5", fontSize: "13pt" }}>
                   {loadedPortfolio.description}
                 </div>
               </h2>
@@ -128,45 +134,7 @@ const Portfolio = () => {
             </li>
           )}
           {loadedPortfolio.components.map((component) => (
-            <li>
-              <div
-                style={{
-                  fontSize: "20pt",
-                  color: "#ffffff",
-                  paddingTop: "10px",
-                  paddingBottom: "10px",
-                }}
-              >
-                {component.title}
-                {component.description}
-              </div>
-              <Card>
-                {component.components.map((subcomponent) => (
-                  <>
-                    <div
-                      style={{
-                        fontSize: "18pt",
-                        color: "#ffffff",
-                        paddingTop: "10px",
-                        paddingBottom: "10px",
-                      }}
-                    >
-                      {subcomponent.title}
-                    </div>
-                    <div
-                      style={{
-                        fontSize: "15pt",
-                        color: "#ffffff",
-                        paddingTop: "10px",
-                        paddingBottom: "10px",
-                      }}
-                    >
-                      {subcomponent.description}
-                    </div>
-                  </>
-                ))}
-              </Card>
-            </li>
+            <PortfolioComponent key={component.id} component={component} />
           ))}
         </>
       )}
