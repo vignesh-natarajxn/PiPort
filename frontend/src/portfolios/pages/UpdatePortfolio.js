@@ -32,6 +32,14 @@ const UpdatePortfolio = () => {
         value: "",
         isValid: false,
       },
+      image: {
+        value: "",
+        isValid: false,
+      },
+      components: {
+        value: "",
+        isValid: false,
+      },
     },
     false
   );
@@ -53,6 +61,14 @@ const UpdatePortfolio = () => {
               value: responseData.portfolio.description,
               isValid: true,
             },
+            image: {
+              value: responseData.portfolio.image,
+              isValid: true,
+            },
+            components: {
+              value: responseData.portfolio.components,
+              isValid: true,
+            },
           },
           true
         );
@@ -70,6 +86,7 @@ const UpdatePortfolio = () => {
         JSON.stringify({
           title: formState.inputs.title.value,
           description: formState.inputs.description.value,
+          image: formState.inputs.image.value,
         }),
         {
           "Content-Type": "application/json",
@@ -125,6 +142,83 @@ const UpdatePortfolio = () => {
             initialValue={loadedPortfolio.description}
             initialValid={true}
           />
+          <Input
+            id="image"
+            element="textarea"
+            label="Image"
+            validators={[VALIDATOR_MINLENGTH(0)]}
+            onInput={inputHandler}
+            initialValue={loadedPortfolio.image}
+            initialValid={true}
+          />
+          {loadedPortfolio.components.map((component) => {
+            <>
+              <Input
+                id="c1title"
+                element="input"
+                type="text"
+                label="Title"
+                validators={[VALIDATOR_REQUIRE()]}
+                errorText="Please enter a valid title."
+                onInput={inputHandler}
+                initialValue={component.title}
+                initialValid={true}
+              />
+              <Input
+                id="c1description"
+                element="textarea"
+                label="Description"
+                validators={[VALIDATOR_MINLENGTH(0)]}
+                onInput={inputHandler}
+                initialValue={component.description}
+                initialValid={true}
+              />
+              <Input
+                id="c1image"
+                element="textarea"
+                label="Image"
+                validators={[VALIDATOR_MINLENGTH(0)]}
+                onInput={inputHandler}
+                initialValue={component.image}
+                initialValid={true}
+              />
+            </>;
+            {
+              component.components.map((component) => {
+                <>
+                  <Input
+                    id="c2title"
+                    element="input"
+                    type="text"
+                    label="Title"
+                    validators={[VALIDATOR_REQUIRE()]}
+                    errorText="Please enter a valid title."
+                    onInput={inputHandler}
+                    initialValue={component.title}
+                    initialValid={true}
+                  />
+                  <Input
+                    id="c2description"
+                    element="textarea"
+                    label="Description"
+                    validators={[VALIDATOR_MINLENGTH(0)]}
+                    onInput={inputHandler}
+                    initialValue={component.description}
+                    initialValid={true}
+                  />
+                  <Input
+                    id="c2image"
+                    element="textarea"
+                    label="Image"
+                    validators={[VALIDATOR_MINLENGTH(0)]}
+                    onInput={inputHandler}
+                    initialValue={component.image}
+                    initialValid={true}
+                  />  
+                </>;
+              });
+            }
+          })}
           <Button type="submit" disabled={!formState.isValid}>
             Update Portfolio
           </Button>
