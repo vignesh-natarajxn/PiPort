@@ -154,7 +154,7 @@ const UpdatePortfolio = () => {
           {loadedPortfolio.components.map((component) => {
             <>
               <Input
-                id="c1title"
+                id={component._id}
                 element="input"
                 type="text"
                 label="Title"
@@ -183,41 +183,6 @@ const UpdatePortfolio = () => {
                 initialValid={true}
               />
             </>;
-            {
-              component.components.map((component) => {
-                <>
-                  <Input
-                    id="c2title"
-                    element="input"
-                    type="text"
-                    label="Title"
-                    validators={[VALIDATOR_REQUIRE()]}
-                    errorText="Please enter a valid title."
-                    onInput={inputHandler}
-                    initialValue={component.title}
-                    initialValid={true}
-                  />
-                  <Input
-                    id="c2description"
-                    element="textarea"
-                    label="Description"
-                    validators={[VALIDATOR_MINLENGTH(0)]}
-                    onInput={inputHandler}
-                    initialValue={component.description}
-                    initialValid={true}
-                  />
-                  <Input
-                    id="c2image"
-                    element="textarea"
-                    label="Image"
-                    validators={[VALIDATOR_MINLENGTH(0)]}
-                    onInput={inputHandler}
-                    initialValue={component.image}
-                    initialValid={true}
-                  />  
-                </>;
-              });
-            }
           })}
           <Button type="submit" disabled={!formState.isValid}>
             Update Portfolio

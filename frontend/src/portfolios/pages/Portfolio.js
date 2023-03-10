@@ -134,7 +134,7 @@ const Portfolio = () => {
             </li>
           )}
           {loadedPortfolio.components.map((component) => (
-            <PortfolioComponent key={component.id} component={component} />
+            <PortfolioComponent key={component._id} component={component} />
           ))}
         </>
       )}
